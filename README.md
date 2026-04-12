@@ -97,6 +97,9 @@ git push origin hotfix/nome-da-correcao
 
 - Criar um PR da branch `feature/*` ou `hotfix/*` para `main`.
 - O PR deve descrever claramente a funcionalidade implementada nos campos título e descrição.
+- Atribua o responsável do PR a você mesmo e também chame outras pessoas para revisar.
+
+![alt text](image.png)
 
 ### 5. Aprovação do Pull Request
 
