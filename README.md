@@ -1,7 +1,7 @@
 # pucrs-gcs-t1
 
 - [pucrs-gcs-t1](#pucrs-gcs-t1)
-- [Link da descrição do trabalho](#link-da-descrição-do-trabalho)
+- [🔗 Links importantes](#-links-importantes)
 - [📦 Gerenciamento de Branches e Fluxo de Trabalho](#-gerenciamento-de-branches-e-fluxo-de-trabalho)
   - [🌳 Estrutura de Branches](#-estrutura-de-branches)
   - [🤔 Quando usar feature ou hotfix](#-quando-usar-feature-ou-hotfix)
@@ -18,9 +18,9 @@
     - [✅ Boas Práticas](#-boas-práticas)
     - [📌 Resumo do Fluxo](#-resumo-do-fluxo)
 
-# Link da descrição do trabalho
+# 🔗 Links importantes
 
-- https://moodle.pucrs.br/pluginfile.php/5915457/mod_resource/content/0/GCS%202026-1%20Trabalho%201.pdf
+- [Descrição do trabalho](https://moodle.pucrs.br/pluginfile.php/5915457/mod_resource/content/0/GCS%202026-1%20Trabalho%201.pdf)
 
 # 📦 Gerenciamento de Branches e Fluxo de Trabalho
 
