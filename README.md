@@ -1,6 +1,7 @@
 # pucrs-gcs-t1
 
 - [pucrs-gcs-t1](#pucrs-gcs-t1)
+- [Link da descrição do trabalho](#link-da-descrição-do-trabalho)
 - [📦 Gerenciamento de Branches e Fluxo de Trabalho](#-gerenciamento-de-branches-e-fluxo-de-trabalho)
   - [🌳 Estrutura de Branches](#-estrutura-de-branches)
   - [🤔 Quando usar feature ou hotfix](#-quando-usar-feature-ou-hotfix)
@@ -17,6 +18,9 @@
     - [✅ Boas Práticas](#-boas-práticas)
     - [📌 Resumo do Fluxo](#-resumo-do-fluxo)
 
+# Link da descrição do trabalho
+
+- https://moodle.pucrs.br/pluginfile.php/5915457/mod_resource/content/0/GCS%202026-1%20Trabalho%201.pdf
 
 # 📦 Gerenciamento de Branches e Fluxo de Trabalho
 
@@ -103,7 +107,7 @@ git push origin hotfix/nome-da-correcao
 
 ### 5. Aprovação do Pull Request
 
-Cada PR deve ter **no mínimo 2 aprovações** de outros integrantes do grupo.
+Cada PR deve ter **no mínimo 1 aprovação** de outros integrantes do grupo.
 
 ### 6. Merge do Pull Request
 
@@ -148,7 +152,7 @@ Motivos:
 - Desenvolver e commitar
 - Fazer push
 - Criar Pull Request
-- Aguardar 2 aprovações
+- Aguardar 1 aprovação
 - Realizar merge
 - Excluir branch local
 
