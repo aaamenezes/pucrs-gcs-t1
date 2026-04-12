@@ -110,7 +110,7 @@ Cada PR deve ter **no mínimo 2 aprovações** de outros integrantes do grupo.
 Após aprovação:
 
 - O responsável pela branch pode realizar o merge.
-- Após o merge, o PR deve ser fechado pelo responsávl por aquela alteração.
+- Após o merge, o PR deve ser fechado pelo responsável por aquela alteração.
 
 ### 7. Remoção da branch local (opcional, mas recomendado)
 
@@ -126,7 +126,7 @@ git pull origin main
 
 ### ❌ Proibido commit direto na main
 
-É expressamente proibido realizar commits diretamente na branch main.
+É expressamente proibido realizar commits diretamente na branch `main`.
 
 Motivos:
 
