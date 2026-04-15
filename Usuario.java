@@ -1,12 +1,13 @@
 public abstract class Usuario {
     private final String nome; //deixei final pelo o que entendi nao vamos alterar cadastro.
     private final String iniciais;
-    private int id= 1;
+    private final int id;
+    private static int incrementoId= 1;
    
     public Usuario(String nome, String iniciais) {
         this.nome = nome;
         this.iniciais = iniciais;
-        this.id = id++; //id autoincrementado
+        this.id = incrementoId++; //id autoincrementado
     }
 
     //deixei uns gets aqui caso fosse necessario, qualquer coisa apaga
