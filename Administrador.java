@@ -3,17 +3,26 @@ public class Administrador extends Usuario {
     public Administrador(String nome) {
         super(nome);
     }
-    public void verEstatisticas(Usuario[] todosUsuarios, int totalU, AutorizacaoExame[] todosExames, int totalE) {
+    
+    public void verEstatisticas() {
+        // Buscar dados dos bancos
+        Usuario[] todosUsuarios = BancoUsuarios.obterTodos();
+        int totalU = BancoUsuarios.obterTotal();
+        
+        AutorizacaoExame[] todosExames = BancoAutorizacaoExames.obterTodos();
+        int totalE = BancoAutorizacaoExames.obterTotal();
+        
+        // Contagem de tipos de usuários
         int medicos = 0;
         int pacientes = 0;
         int realizados = 0;
 
-        for (int i = 0; i < totalU; i++) { // contagem do tipo de usuarios que a gente tem
+        for (int i = 0; i < totalU; i++) {
             if (todosUsuarios[i] instanceof Medico) medicos++;
             else if (todosUsuarios[i] instanceof Paciente) pacientes++;
         }
 
-        for (int i = 0; i < totalE; i++) { // contagem tb só que pros exames
+        for (int i = 0; i < totalE; i++) {
             if (todosExames[i].isRealizado()) realizados++;
         }
 
@@ -24,14 +33,53 @@ public class Administrador extends Usuario {
         System.out.println("Exames realizados: " + percentual + "%");
     }
 
-    public void buscarUsuario(Usuario[] lista, int total, String termoBusca) { //busca de pacientes e medicos pelos nomes 
-        System.out.println("Resultados para: " + termoBusca);
+    public Medico buscarMedicoPeloNome(String nome) {
+        Usuario[] todosUsuarios = BancoUsuarios.obterTodos();
+        int total = BancoUsuarios.obterTotal();
+        
         for (int i = 0; i < total; i++) {
-            if (lista[i].getNome().toLowerCase().contains(termoBusca.toLowerCase()) && 
-               !(lista[i] instanceof Administrador)) {
-                
-                System.out.println("ID: " + lista[i].getId() + " | Nome: " + lista[i].getNome());
+            if (todosUsuarios[i] instanceof Medico && 
+                todosUsuarios[i].getNome().toLowerCase().contains(nome.toLowerCase())) {
+                return (Medico) todosUsuarios[i];
             }
         }
+        return null;
+    }
+    
+    public Paciente buscarPacientePeloNome(String nome) {
+        Usuario[] todosUsuarios = BancoUsuarios.obterTodos();
+        int total = BancoUsuarios.obterTotal();
+        
+        for (int i = 0; i < total; i++) {
+            if (todosUsuarios[i] instanceof Paciente && 
+                todosUsuarios[i].getNome().toLowerCase().contains(nome.toLowerCase())) {
+                return (Paciente) todosUsuarios[i];
+            }
+        }
+        return null;
+    }
+    
+    public boolean incluirMedico(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return false;
+        }
+        Medico novoMedico = new Medico(nome);
+        return BancoUsuarios.adicionarUsuario(novoMedico);
+    }
+    
+    public boolean incluirPaciente(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return false;
+        }
+        Paciente novoPaciente = new Paciente(nome);
+        return BancoUsuarios.adicionarUsuario(novoPaciente);
+    }
+    
+    public boolean incluirAdministrador(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return false;
+        }
+        Administrador novoAdministrador = new Administrador(nome);
+        return BancoUsuarios.adicionarUsuario(novoAdministrador);
     }
 }
