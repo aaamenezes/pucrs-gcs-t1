@@ -3,8 +3,8 @@ import java.util.Date;
  
 public class Paciente extends Usuario {
  
-    public Paciente(String id, String nome, String iniciais) {
-        super(id, nome, iniciais);
+    public Paciente(String nome) {
+        super(nome);
     }
  
     public boolean marcarAutorizacaoExameComoRealizado(AutorizacaoExame autorizacaoExame, Date data) {
