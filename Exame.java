@@ -47,7 +47,7 @@ public class Exame{
                 + "; Data Realizacao: " + dataRealizacao;
         else 
             return "Id: " + idExame + "; Tipo de Exame: " + tipoExame + "; Status: " + realizado
-                + "; Data Realizacao: " + dataRealizacao + "; Id da autorizacao: " + autorizacao.getId();
+                + "; Data Realizacao: " + dataRealizacao + "; Id da autorizacao: " + autorizacao.getCodigo();
     }
     
 }
