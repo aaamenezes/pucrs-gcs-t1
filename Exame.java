@@ -17,12 +17,12 @@ public class Exame{
         idAutorizacao = null;
         this.tipoExame = tipoExame;
         idExame = id;
-        id++
+        id++;
     }
 
-    public TipoExame getTipoExame(){return tipoExame;}
-    public boolean getRealizado(){return realizado;}
-    public LocalDate getDataRealizacao(){return dataRealizacao;}
+    public TipoExame getTipoExame(){return this.tipoExame;}
+    public boolean getRealizado(){return this.realizado;}
+    public LocalDate getDataRealizacao(){return this.dataRealizacao;}
 
     public void realizarExame(LocalDate dataInformada, LocalDate dataAutorizacao){
         long diferenca = ChronoUnit.DAYS.between(dataInformada, dataAutorizacao);
