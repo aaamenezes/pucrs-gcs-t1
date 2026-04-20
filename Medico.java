@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 
 public class Medico extends Usuario {
+
+    public Medico(String nome) {
+        super(nome);
+    }
+
     public boolean incluirAutorizacaoExame(BancoAutorizacaoExames banco, AutorizacaoExame autorizacaoExame) {
         return banco.incluirAutorizacaoExame(autorizacaoExame);
     }
