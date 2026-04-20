@@ -1,9 +1,9 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AutorizacaoExame {
     private static int contadorSequencial = 1000;
     private int codigo;
-    private Date dataCadastro;
+    private LocalDate dataCadastro;
     private Medico medicoSolicitante;
     private Paciente paciente;
     private Exame exame;
@@ -13,7 +13,7 @@ public class AutorizacaoExame {
         this.paciente = paciente;
         this.exame = exame;
 
-        this.dataCadastro = new Date();
+        this.dataCadastro = LocalDate.now();
         this.codigo =  contadorSequencial;
         contadorSequencial++;
     }
@@ -21,15 +21,15 @@ public class AutorizacaoExame {
 
 
     public int getCodigo() {
-        return codigo;
+        return this.codigo;
     }
     public Medico getMedicoSolicitante() {
-        return medicoSolicitante;
+        return this.medicoSolicitante;
     }
     public Paciente getPaciente() {
-        return paciente;
+        return this.paciente;
     }
     public Exame getExame() {
-        return exame;
+        return this.exame;
     }
 }
