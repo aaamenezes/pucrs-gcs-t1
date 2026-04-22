@@ -25,8 +25,8 @@ public class Administrador extends Usuario {
             }
         }
 
-        for (int i = 0; i < totalE; i++) {
-            if (todosExames[i].isRealizado()) realizados++;
+        for (AutorizacaoExame autorizacaoExame : todosExames) {
+            if (autorizacaoExame.isRealizado() realizados++;
         }
 
         double percentual = (totalE > 0) ? ((double) realizados / totalE) * 100 : 0;
