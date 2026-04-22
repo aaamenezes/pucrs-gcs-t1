@@ -17,12 +17,12 @@ public class Exame{
         idAutorizacao = null;
         this.tipoExame = tipoExame;
         idExame = id;
-        id++
+        id++;
     }
 
-    public TipoExame getTipoExame(){return tipoExame;}
-    public boolean getRealizado(){return realizado;}
-    public LocalDate getDataRealizacao(){return dataRealizacao;}
+    public TipoExame getTipoExame(){return this.tipoExame;}
+    public boolean getRealizado(){return this.realizado;}
+    public LocalDate getDataRealizacao(){return this.dataRealizacao;}
 
     public void realizarExame(LocalDate dataInformada, LocalDate dataAutorizacao){
         long diferenca = ChronoUnit.DAYS.between(dataInformada, dataAutorizacao);
@@ -47,7 +47,7 @@ public class Exame{
                 + "; Data Realizacao: " + dataRealizacao;
         else 
             return "Id: " + idExame + "; Tipo de Exame: " + tipoExame + "; Status: " + realizado
-                + "; Data Realizacao: " + dataRealizacao + "; Id da autorizacao: " + autorizacao.getId();
+                + "; Data Realizacao: " + dataRealizacao + "; Id da autorizacao: " + autorizacao.getCodigo();
     }
     
 }
