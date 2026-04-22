@@ -52,9 +52,13 @@ public class BancoUsuarios {
         return null;
     }
 
-    public void listar() {
-        for (int i = 0; i < usuarios.size(); i++) {
-            System.out.println(usuarios.get(i).getNome());
+    public ArrayList<Usuario> listar() {
+     ArrayList<Usuario> aux = new ArrayList<>();
+for (Usuario u : usuarios) {
+            aux.add(u);
+        }
+return aux;
+    }
         }
     }
 }
