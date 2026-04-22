@@ -52,10 +52,9 @@ public class Administrador extends Usuario {
         Usuario[] todosUsuarios = BancoUsuarios.obterTodos();
         int total = BancoUsuarios.obterTotal();
         
-        for (int i = 0; i < total; i++) {
-            if (todosUsuarios[i] instanceof Paciente && 
-                todosUsuarios[i].getNome().toLowerCase().contains(nome.toLowerCase())) {
-                return (Paciente) todosUsuarios[i];
+        for (Usuario usuario : todosUsuarios) {
+            if (usuario instanceof Paciente && usuario.getNome().toLowerCase().contains(nome.toLowerCase())) {
+                return (Paciente) usuario;
             }
         }
         return null;
