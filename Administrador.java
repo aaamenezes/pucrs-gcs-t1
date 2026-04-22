@@ -17,9 +17,12 @@ public class Administrador extends Usuario {
         int pacientes = 0;
         int realizados = 0;
 
-        for (int i = 0; i < totalU; i++) {
-            if (todosUsuarios[i] instanceof Medico) medicos++;
-            else if (todosUsuarios[i] instanceof Paciente) pacientes++;
+        for (Usuario usuario : todosUsuarios) {
+            if (usuario instanceof Medico) {
+                medicos++;
+            } else if (usuario instanceof Paciente) {
+                pacientes++;
+            }
         }
 
         for (int i = 0; i < totalE; i++) {
