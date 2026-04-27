@@ -4,84 +4,61 @@ import java.util.ArrayList;
 
 public class BancoAutorizacaoExames {
 
-private ArrayList<AutorizacaoExame> autorizacaoExames;
+    private ArrayList<AutorizacaoExame> autorizacaoExames;
 
-public BancoAutorizacaoExames() {
-autorizacaoExames = new ArrayList<>();
-}
+    public BancoAutorizacaoExames() {
+        this.autorizacaoExames = new ArrayList<>();
+    }
 
-public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(Paciente paciente) {
-ArrayList<AutorizacaoExame> lista = new ArrayList<>();
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorTipo(TipoExame tipoExame) {
+        ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
-for (AutorizacaoExame a : autorizacaoExames) {
-if (a.getPaciente().equals(paciente)) {
-lista.add(a);
-}
-}
+        for (AutorizacaoExame a : this.autorizacaoExames) {
+            if (a.getExame().getTipoExame() == tipoExame) {
+                lista.add(a);
+            }
+        }
 
-return lista;
-}
+        return lista;
+    }
 
-public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorTipo(TipoExame tipoExame) {
-ArrayList<AutorizacaoExame> lista = new ArrayList<>();
+    public boolean marcarAutorizacaoExameComoRealizado(AutorizacaoExame autorizacaoExame, LocalDate data,
+            Paciente paciente) {
+        if (!autorizacaoExame.getPaciente().equals(paciente)) {
+            return false;
+        }
 
-for (AutorizacaoExame a : autorizacaoExames) {
-if (a.getExame().getTipoExame() == tipoExame) {
-lista.add(a);
-}
-}
+        LocalDate dataCadastro = autorizacaoExame.getDataCadastro();
 
-return lista;
-}
+        if (data.isBefore(dataCadastro)) {
+            return false;
+        }
 
-public boolean marcarAutorizacaoExameComoRealizado(AutorizacaoExame autorizacaoExame, LocalDate data, Paciente paciente) {
-if (!autorizacaoExame.getPaciente().equals(paciente)) {
-return false;
-}
+        long dias = ChronoUnit.DAYS.between(dataCadastro, data);
 
-LocalDate dataCadastro = autorizacaoExame.getDataCadastro();
+        if (dias > 30) {
+            return false;
+        }
 
-if (data.isBefore(dataCadastro)) {
-return false;
-}
+        autorizacaoExame.getExame().setRealizado(true);
+        autorizacaoExame.getExame().setDataRealizacao(data);
 
-long dias = ChronoUnit.DAYS.between(dataCadastro, data);
+        return true;
+    }
 
-if (dias > 30) {
-return false;
-}
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario) {
+        ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
-autorizacaoExame.getExame().setRealizado(true);
-autorizacaoExame.getExame().setDataRealizacao(data);
+        for (AutorizacaoExame a : autorizacaoExames) {
+            if (a.getPaciente().equals(usuario)) {
+                lista.add(a);
+            }
+        }
 
-return true;
-}
+        return lista;
+    }
 
-public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Paciente paciente) {
-ArrayList<AutorizacaoExame> lista = new ArrayList<>();
-
-for (AutorizacaoExame a : autorizacaoExames) {
-if (a.getPaciente().equals(paciente)) {
-lista.add(a);
-}
-}
-
-return lista;
-}
-
-public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario) {
-ArrayList<AutorizacaoExame> lista = new ArrayList<>();
-
-for (AutorizacaoExame a : autorizacaoExames) {
-if (a.getPaciente().equals(usuario)) {
-lista.add(a);
-}
-}
-
-return lista;
-}
-
-public void adicionarAutorizacao(AutorizacaoExame autorizacao) {
-autorizacaoExames.add(autorizacao);
-}
+    public void adicionarAutorizacao(AutorizacaoExame autorizacao) {
+        autorizacaoExames.add(autorizacao);
+    }
 }
