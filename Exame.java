@@ -14,40 +14,44 @@ public class Exame{
     public Exame(TipoExame tipoExame){
         dataRealizacao = null;
         realizado = false;
-        idAutorizacao = null;
         this.tipoExame = tipoExame;
         idExame = id;
         id++;
     }
 
+    public int getIdExame(){return this.idExame;}
     public TipoExame getTipoExame(){return this.tipoExame;}
-    public boolean getRealizado(){return this.realizado;}
+    public boolean isRealizado(){return this.realizado;}
     public LocalDate getDataRealizacao(){return this.dataRealizacao;}
 
-    public void realizarExame(LocalDate dataInformada, LocalDate dataAutorizacao){
-        long diferenca = ChronoUnit.DAYS.between(dataInformada, dataAutorizacao);
-        if (diferenca < 0)
-            System.out.println("Erro: A data informada é anterior à data da autorização do exame.");
-        else if (diferenca > 30)
-            System.out.println("Erro: O exame só pode ser realizado dentro de 30 dias.");
-        else {
-            dataRealizacao = dataInformada;
-            realizado = true;
-            System.out.println("Exame realizado com sucesso!");
-        }
-    }
+    public void realizarExame(LocalDate dataRealizacao, AutorizacaoExame autorizacao){
+        if (dataRealizacao == null || autorizacao == null)
+            throw new IllegalArgumentException("Erro: um dos parâmetros é nulo.");
+        if (realizado)
+            throw new IllegalStateException("Erro: Este exame já foi realizado.");
 
-    public void setAutorizacao(AutorizacaoExame autorizacao){
+        LocalDate dataAutorizacao = autorizacao.getDataCadastro();
+        long diferenca = ChronoUnit.DAYS.between(dataAutorizacao, dataRealizacao);
+        
+        if (diferenca < 0)
+            throw new IllegalArgumentException("Erro: A data de realização do exame não pode ser anterior à data da autorização do exame.");
+        if (diferenca > 30)
+            throw new IllegalArgumentException("Erro: O exame só pode ser realizado dentro de 30 dias.");
+        
+        this.dataRealizacao = dataRealizacao;
         this.autorizacao = autorizacao;
+        realizado = true;
     }
 
     public String toString(){
-        if (autorizacao.isNull())
-            return "Id: " + idExame + "; Tipo de Exame: " + tipoExame + "; Status: " + realizado
-                + "; Data Realizacao: " + dataRealizacao;
+        String retorno = "Id: " + this.idExame + 
+                         "; Tipo de Exame: " + this.tipoExame + 
+                         "; Status: " + this.realizado;
+        if (autorizacao == null)
+            return retorno;
         else 
-            return "Id: " + idExame + "; Tipo de Exame: " + tipoExame + "; Status: " + realizado
-                + "; Data Realizacao: " + dataRealizacao + "; Id da autorizacao: " + autorizacao.getCodigo();
+            return retorno + "; Data Realizacao: " + this.dataRealizacao +
+                             "; Id da autorizacao: " + this.autorizacao.getCodigo();
     }
     
 }
