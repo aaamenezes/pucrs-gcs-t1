@@ -7,7 +7,7 @@ public class Medico extends Usuario {
     }
 
     public boolean incluirAutorizacaoExame(BancoAutorizacaoExames banco, AutorizacaoExame autorizacaoExame) {
-        return banco.incluirAutorizacaoExame(autorizacaoExame);
+        return banco.adicionarAutorizacao(autorizacaoExame);
     }
 
     public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(BancoAutorizacaoExame banco, Paciente paciente) {
