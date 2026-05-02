@@ -7,14 +7,20 @@ public class Medico extends Usuario {
     }
 
     public boolean incluirAutorizacaoExame(BancoAutorizacaoExames banco, AutorizacaoExame autorizacaoExame) {
-        return banco.incluirAutorizacaoExame(autorizacaoExame);
+        return banco.adicionarAutorizacao(autorizacaoExame);
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(BancoAutorizacaoExame banco, Paciente paciente) {
-        return banco.listarAutorizacaoExamesPorPaciente(paciente);
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(
+        BancoAutorizacaoExame banco,
+        Paciente paciente
+    ) {
+        return banco.listarAutorizacaoExames(paciente);
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorTipo(BancoAutorizacaoExame banco, TipoExame tipoExame) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorTipo(
+        BancoAutorizacaoExame banco,
+        TipoExame tipoExame
+    ) {
         return banco.listarAutorizacaoExamesPorTipo(tipoExame);
     }
 }
