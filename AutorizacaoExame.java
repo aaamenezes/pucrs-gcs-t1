@@ -23,6 +23,9 @@ public class AutorizacaoExame {
     public int getCodigo() {
         return this.codigo;
     }
+    public LocalDate gLocalDate(){
+        return this.dataCadastro;
+    }
     public Medico getMedicoSolicitante() {
         return this.medicoSolicitante;
     }
@@ -31,5 +34,14 @@ public class AutorizacaoExame {
     }
     public Exame getExame() {
         return this.exame;
+    }
+
+    @Override
+    public String toString(){
+        return "Código: " + this.codigo + 
+                         "; Data Cadastro:  " + this.dataCadastro + 
+                         "; Médico Solicitante:  " + this.medicoSolicitante 
+                             + "; Paciente: " + this.paciente +
+                             "; Exame: " + this.exame;
     }
 }
