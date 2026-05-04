@@ -24,8 +24,6 @@ public class Exame{
     public boolean isRealizado(){return this.realizado;}
     public LocalDate getDataRealizacao(){return this.dataRealizacao;}
 
-    public void setRealizado(boolean realizado){this.realizado = realizado;}
-    public void setDataRealizacao(LocalDate dataRealizacao){this.dataRealizacao = dataRealizacao;}
 
     public void realizarExame(LocalDate dataRealizacao, AutorizacaoExame autorizacao){
         if (dataRealizacao == null || autorizacao == null)

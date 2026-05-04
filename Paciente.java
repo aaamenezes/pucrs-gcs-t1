@@ -11,8 +11,7 @@ public class Paciente extends Usuario {
         if (autorizacaoExame == null) {
             return false;
         }
-        autorizacaoExame.getExame().setRealizado(true);
-        autorizacaoExame.getExame().setDataRealizacao(data);
+        autorizacaoExame.getExame().realizarExame(data, autorizacaoExame);
         return true;
     }
  
