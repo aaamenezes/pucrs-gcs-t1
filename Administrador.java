@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Administrador extends Usuario {
@@ -6,10 +7,8 @@ public class Administrador extends Usuario {
         super(nome);
     }
 
-    public void verEstatisticas(BancoUsuarios bancoUsuarios, BancoAutorizacaoExames bancoExames) { 
+    public void verEstatisticas(BancoUsuarios bancoUsuarios, BancoAutorizacaoExames bancoExames) {
         ArrayList<Usuario> todosUsuarios = bancoUsuarios.obterTodos();
-        int totalU = bancoUsuarios.obterTotal(); 
-
         ArrayList<AutorizacaoExame> todosExames = bancoExames.obterTodos();
         int totalE = bancoExames.obterTotal();
 
@@ -32,15 +31,24 @@ public class Administrador extends Usuario {
         }
 
         double percentual = (totalE > 0) ? ((double) realizados / totalE) * 100 : 0;
-        System.out.println("Total de usuários: " + totalU);
         System.out.println("Médicos cadastrados: " + medicos);
         System.out.println("Pacientes cadastrados: " + pacientes);
         System.out.println("Total de autorizações: " + totalE);
-        System.out.println("Percentual de exames realizados: " + percentual + "%");
+        System.out.println("Exames realizados: " + percentual + "%");
     }
 
-     public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario, BancoAutorizacaoExames bancoExames) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario, BancoAutorizacaoExames bancoExames) {
         return bancoExames.listarAutorizacaoExames(usuario);
+    }
+
+    public Paciente buscarPacientePeloNome(String nome, BancoUsuarios bancoUsuarios) {
+        ArrayList<Usuario> todos = bancoUsuarios.obterTodos();
+        for (Usuario u : todos) {
+            if (u instanceof Paciente && u.getNome().equalsIgnoreCase(nome)) {
+                return (Paciente) u;
+            }
+        }
+        return null;
     }
 
     public Medico buscarMedicoPeloNome(String nome, BancoUsuarios bancoUsuarios) {
@@ -51,6 +59,14 @@ public class Administrador extends Usuario {
             }
         }
         return null;
+    }
+
+    public boolean incluirAdministrador(String nome, BancoUsuarios bancoUsuarios) {
+        if (nome == null || nome.trim().isEmpty()) {
+            return false;
+        }
+        Administrador novoAdministrador = new Administrador(nome);
+        return bancoUsuarios.adicionarUsuario(novoAdministrador);
     }
 
     public boolean incluirMedico(String nome, BancoUsuarios bancoUsuarios) {
