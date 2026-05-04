@@ -46,11 +46,11 @@ public class BancoAutorizacaoExames {
         return true;
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorUsuario(Usuario usuario) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorUsuario(Paciente paciente) {
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
         for (AutorizacaoExame a : this.autorizacaoExames) {
-            if (a.getPaciente().equals(usuario)) {
+            if (a.getPaciente().equals(paciente)) {
                 lista.add(a);
             }
         }
@@ -70,10 +70,10 @@ public class BancoAutorizacaoExames {
         return lista;
     }
 
-    public  ArrayList<AutorizacaoExame> listarAutorizacaoExames(autorizacaoExames autExames){
+    public  ArrayList<AutorizacaoExame> listarAutorizacaoExames(){
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
-        for (AutorizacaoExame autorizacao : autExames) {
+        for (AutorizacaoExame autorizacao : this.autorizacaoExames) {
             lista.add(autorizacao);
         }
         return lista;
