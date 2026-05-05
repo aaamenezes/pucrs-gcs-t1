@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class BancoUsuarios {
@@ -6,6 +7,18 @@ public class BancoUsuarios {
 
     public BancoUsuarios() {
         usuarios = new ArrayList<>();
+    }
+
+    public ArrayList<Usuario> obterTodos() {
+        return new ArrayList<>(this.usuarios);
+    }
+
+    public int obterTotal() {
+        return this.usuarios.size();
+    }
+
+    public boolean adicionarUsuario(Usuario u) {
+        return this.usuarios.add(u);
     }
 
     public boolean incluirMedico(String nome) {
@@ -53,12 +66,10 @@ public class BancoUsuarios {
     }
 
     public ArrayList<Usuario> listar() {
-     ArrayList<Usuario> aux = new ArrayList<>();
-for (Usuario u : usuarios) {
+        ArrayList<Usuario> aux = new ArrayList<>();
+        for (Usuario u : usuarios) {
             aux.add(u);
         }
-return aux;
-    }
-        }
+        return aux;
     }
 }
