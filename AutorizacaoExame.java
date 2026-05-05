@@ -23,7 +23,7 @@ public class AutorizacaoExame {
     public int getCodigo() {
         return this.codigo;
     }
-    public LocalDate getLocalDate(){
+    public LocalDate getDataCadastro(){
         return this.dataCadastro;
     }
     public Medico getMedicoSolicitante() {

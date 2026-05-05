@@ -46,7 +46,7 @@ public class BancoAutorizacaoExames {
         return true;
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorUsuario(Paciente paciente) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(Paciente paciente) {
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
         for (AutorizacaoExame a : this.autorizacaoExames) {
