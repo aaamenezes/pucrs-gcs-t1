@@ -24,6 +24,7 @@ public class Exame{
     public boolean isRealizado(){return this.realizado;}
     public LocalDate getDataRealizacao(){return this.dataRealizacao;}
 
+
     public void realizarExame(LocalDate dataRealizacao, AutorizacaoExame autorizacao){
         if (dataRealizacao == null || autorizacao == null)
             throw new IllegalArgumentException("Erro: um dos parâmetros é nulo.");
