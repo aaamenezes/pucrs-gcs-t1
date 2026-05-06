@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -20,6 +21,14 @@ public class BancoAutorizacaoExames {
         }
 
         return lista;
+    }
+
+    public ArrayList<AutorizacaoExame> obterTodos() {
+        return new ArrayList<>(this.autorizacaoExames);
+    }
+
+    public int obterTotal() {
+        return this.autorizacaoExames.size();
     }
 
     public boolean marcarAutorizacaoExameComoRealizado(AutorizacaoExame autorizacaoExame, LocalDate data,
