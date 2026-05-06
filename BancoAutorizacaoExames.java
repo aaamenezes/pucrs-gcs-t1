@@ -55,15 +55,36 @@ public class BancoAutorizacaoExames {
         return true;
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(Paciente paciente) {
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
-        for (AutorizacaoExame a : autorizacaoExames) {
-            if (a.getPaciente().equals(usuario)) {
+        for (AutorizacaoExame a : this.autorizacaoExames) {
+            if (a.getPaciente().equals(paciente)) {
                 lista.add(a);
             }
         }
 
+        return lista;
+    }
+
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorMedico(Medico medico){
+        ArrayList<AutorizacaoExame> lista = new ArrayList<>();
+
+        for (AutorizacaoExame a : this.autorizacaoExames) {
+            if (a.getMedicoSolicitante().equals(medico)) {
+                lista.add(a);
+            }
+        }
+
+        return lista;
+    }
+
+    public  ArrayList<AutorizacaoExame> listarAutorizacaoExames(){
+        ArrayList<AutorizacaoExame> lista = new ArrayList<>();
+
+        for (AutorizacaoExame autorizacao : this.autorizacaoExames) {
+            lista.add(autorizacao);
+        }
         return lista;
     }
 
