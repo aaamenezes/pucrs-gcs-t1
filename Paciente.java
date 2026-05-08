@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
- 
+
 public class Paciente extends Usuario {
- 
+
     public Paciente(String nome) {
         super(nome);
     }
- 
+
     public boolean marcarAutorizacaoExameComoRealizado(AutorizacaoExame autorizacaoExame, LocalDate data) {
         if (autorizacaoExame == null) {
             return false;
@@ -14,9 +14,9 @@ public class Paciente extends Usuario {
         autorizacaoExame.getExame().realizarExame(data, autorizacaoExame);
         return true;
     }
- 
+
     // Listar autorizações exames
     public ArrayList<AutorizacaoExame> listarAutorizacaoExames(BancoAutorizacaoExames banco) {
-        return banco.listarAutorizacaoExames(this);
+        return banco.listarAutorizacaoExames();
     }
 }

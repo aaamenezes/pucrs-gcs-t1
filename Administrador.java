@@ -38,7 +38,13 @@ public class Administrador extends Usuario {
     }
 
     public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario, BancoAutorizacaoExames bancoExames) {
-        return bancoExames.listarAutorizacaoExames(usuario);
+        if (usuario instanceof Medico) {
+            return bancoExames.listarAutorizacaoExamesPorMedico((Medico) usuario);
+        } else if (usuario instanceof Paciente) {
+            return bancoExames.listarAutorizacaoExamesPorPaciente((Paciente) usuario);
+        }
+
+        return null;
     }
 
     public Paciente buscarPacientePeloNome(String nome, BancoUsuarios bancoUsuarios) {

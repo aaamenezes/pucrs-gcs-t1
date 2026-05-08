@@ -11,16 +11,14 @@ public class Medico extends Usuario {
     }
 
     public ArrayList<AutorizacaoExame> listarAutorizacaoExames(
-        BancoAutorizacaoExame banco,
-        Paciente paciente
-    ) {
-        return banco.listarAutorizacaoExames(paciente);
+            BancoAutorizacaoExames banco,
+            Paciente paciente) {
+        return banco.listarAutorizacaoExamesPorPaciente(paciente);
     }
 
     public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorTipo(
-        BancoAutorizacaoExame banco,
-        TipoExame tipoExame
-    ) {
+            BancoAutorizacaoExames banco,
+            TipoExame tipoExame) {
         return banco.listarAutorizacaoExamesPorTipo(tipoExame);
     }
 }
