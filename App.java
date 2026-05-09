@@ -46,6 +46,7 @@ public class App {
 
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
+        System.out.println("Seja bem vindo, " + this.usuarioLogado.getNome() + "!");
     }
 
     public void mostrarMenu() {
@@ -67,8 +68,6 @@ public class App {
     }
 
     private void showMenuAdministrador() {
-        System.out.println("Seja bem vindo, adm. " + this.usuarioLogado.getNome() + "!");
-
         int opcao = 0;
 
         while (opcao <= 0 || opcao >= 5) {
@@ -76,7 +75,8 @@ public class App {
             System.out.println("1 - Ver nome do usuário");
             System.out.println("2 - Ver iniciais do usuário");
             System.out.println("3 - Incluir usuário");
-            System.out.println("4 - Sair");
+            System.out.println("4 - Trocar usuário logado");
+            System.out.println("5 - Sair");
             opcao = this.scanner.nextInt();
             this.scanner.nextLine();
         }
@@ -95,6 +95,10 @@ public class App {
                 showMenuAdministrador();
                 break;
             case 4:
+                login();
+                mostrarMenu();
+                break;
+            case 5:
                 System.out.println("Saindo...");
                 break;
             default:
