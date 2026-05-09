@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
     Usuario usuarioLogado;
-    static Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     private BancoUsuarios usuarios = new BancoUsuarios();
     private BancoAutorizacaoExames autorizacaoExames = new BancoAutorizacaoExames();
 
