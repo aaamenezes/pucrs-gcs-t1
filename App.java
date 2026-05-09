@@ -13,11 +13,6 @@ public class App {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public static void main(String[] args) {
-        new App().executar();
-    }
-
-
     public App() {
         login();
     }
@@ -130,7 +125,7 @@ public class App {
 
     //Permicao para o Paciente marcar como realizado uma autorizacao
     private void marcarExameComoRealizadoPaciente() {
-        System.out.println("Para marcar como realizado o exame, insira a data do exame: ");
+        System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
         String dataInserida = scanner.nextLine();
 
         LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
