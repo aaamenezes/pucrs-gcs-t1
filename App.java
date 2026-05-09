@@ -11,7 +11,33 @@ public class App {
     }
 
     public void executar() {
+        if (this.usuarioLogado != null) {
+            showMenu();
+        } else {
+            System.out.println("Nenhum usuário logado. Faça login para acessar o sistema.");
+            login();
+        }
+    }
 
+    public void showMenu() {
+        if (this.usuarioLogado instanceof Paciente) {
+            showMenuPaciente();
+        } else if (this.usuarioLogado instanceof Medico) {
+            showMenuMedico();
+        } else if (this.usuarioLogado instanceof Administrador) {
+            showMenuAdministrador();
+        } else {
+            System.out.println("Tipo de usuário desconhecido.");
+        }
+    }
+
+    private void showMenuPaciente() {
+    }
+
+    private void showMenuMedico() {
+    }
+
+    private void showMenuAdministrador() {
     }
 
     /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
