@@ -1,14 +1,55 @@
+import java.util.Scanner;
+
 public class App {
+    Usuario usuarioLogado;
+    static Scanner scanner = new Scanner(System.in);
     private BancoUsuarios banco = new BancoUsuarios();
     private BancoAutorizacaoExames bancoAutorizacaoExames = new BancoAutorizacaoExames();
 
-    public static void main(String[] args) {
+    public App() {
+        login();
     }
-
+      
     public void executar() {
 
     }
 
+    /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
+    private void login() {
+        String nome;
+        int opcao = 0;
+
+        while (opcao <= 0 || opcao >= 4) {
+            System.out.println("Escolha uma opção:");
+            System.out.println("1 - Paciente");
+            System.out.println("2 - Medico");
+            System.out.println("3 - Administrador");
+            opcao = this.scanner.nextInt();
+            this.scanner.nextLine();
+        }
+
+        System.out.println("Digite o nome do usuário:");
+        nome = this.scanner.nextLine();
+
+        if (opcao == 1) {
+            this.usuarioLogado = new Paciente(nome);
+        } else if (opcao == 2) {
+            this.usuarioLogado = new Medico(nome);
+        } else if (opcao == 3) {
+            this.usuarioLogado = new Administrador(nome);
+        }
+    }
+
+    private void verNomeUsuario() {
+        System.out.println(this.usuarioLogado.getNome());
+    }
+
+    private void verIniciaisUsuario() {
+        System.out.println(this.usuarioLogado.getIniciais());
+    }
+
+      
+ /*--------|   INCLUSÃO DE DADOS   |--------*/
     public void inicializarDados() {
         // ADICIONANDO 5 MÉDICOS 
         this.banco.incluirMedico("Ana Silva");
@@ -91,7 +132,7 @@ public class App {
         Exame e10 = new Exame(TipoExame.COLESTEROL_TOTAL);
         AutorizacaoExame aut10 = new AutorizacaoExame(med1, pac2, e10);
         this.bancoAutorizacaoExames.adicionarAutorizacao(aut10);    
-
     }
 
+      
 }

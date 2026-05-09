@@ -49,8 +49,7 @@ public class BancoAutorizacaoExames {
             return false;
         }
 
-        autorizacaoExame.getExame().setRealizado(true);
-        autorizacaoExame.getExame().setDataRealizacao(data);
+        autorizacaoExame.getExame().realizarExame(data, autorizacaoExame);
 
         return true;
     }
@@ -67,7 +66,7 @@ public class BancoAutorizacaoExames {
         return lista;
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorMedico(Medico medico){
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorMedico(Medico medico) {
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
         for (AutorizacaoExame a : this.autorizacaoExames) {
@@ -79,7 +78,7 @@ public class BancoAutorizacaoExames {
         return lista;
     }
 
-    public  ArrayList<AutorizacaoExame> listarAutorizacaoExames(){
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExames() {
         ArrayList<AutorizacaoExame> lista = new ArrayList<>();
 
         for (AutorizacaoExame autorizacao : this.autorizacaoExames) {
@@ -88,7 +87,7 @@ public class BancoAutorizacaoExames {
         return lista;
     }
 
-    public void adicionarAutorizacao(AutorizacaoExame autorizacao) {
-        autorizacaoExames.add(autorizacao);
+    public boolean adicionarAutorizacao(AutorizacaoExame autorizacao) {
+        return this.autorizacaoExames.add(autorizacao);
     }
 }
