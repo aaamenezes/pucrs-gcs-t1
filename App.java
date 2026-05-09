@@ -112,6 +112,35 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
+    private void incluirUsuario() {
+        int opcao = 0;
+        String nome;
+
+        while (opcao <= 0 || opcao >= 4) {
+            System.out.println("Qual o tipo de usuário a ser incluído?");
+            System.out.println("1 - Paciente");
+            System.out.println("2 - Medico");
+            System.out.println("3 - Administrador");
+            opcao = this.scanner.nextInt();
+            this.scanner.nextLine();
+        }
+
+        System.out.println("Digite o nome do novo usuário:");
+        nome = this.scanner.nextLine();
+        Usuario novoUsuario = null;
+
+        if (opcao == 1) {
+            novoUsuario = new Paciente(nome);
+        } else if (opcao == 2) {
+            novoUsuario = new Medico(nome);
+        } else if (opcao == 3) {
+            novoUsuario = new Administrador(nome);
+        }
+
+        this.usuarios.adicionarUsuario(novoUsuario);
+        System.out.println("Usuário " + nome + " incluído com sucesso!");
+    }
+
     /*--------|   INCLUSÃO DE DADOS   |--------*/
     public void inicializarDados() {
         // ADICIONANDO 5 MÉDICOS
