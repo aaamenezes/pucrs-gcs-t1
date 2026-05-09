@@ -12,7 +12,7 @@ public class App {
 
     public void executar() {
         if (this.usuarioLogado != null) {
-            showMenu();
+            mostrarMenu();
         } else {
             System.out.println("Nenhum usuário logado. Faça login para acessar o sistema.");
             login();
@@ -48,7 +48,7 @@ public class App {
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
     }
 
-    public void showMenu() {
+    public void mostrarMenu() {
         if (this.usuarioLogado instanceof Paciente) {
             showMenuPaciente();
         } else if (this.usuarioLogado instanceof Medico) {
