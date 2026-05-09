@@ -38,6 +38,9 @@ public class App {
         } else if (opcao == 3) {
             this.usuarioLogado = new Administrador(nome);
         }
+
+        System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
+        System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
     }
 
     private void verNomeUsuario() {
