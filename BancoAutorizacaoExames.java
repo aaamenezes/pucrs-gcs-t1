@@ -40,17 +40,20 @@ public class BancoAutorizacaoExames {
         LocalDate dataCadastro = autorizacaoExame.getDataCadastro();
 
         if (data.isBefore(dataCadastro)) {
+            System.out.println("Erro: A data inserida é anterior a solicitação ");
             return false;
         }
 
         long dias = ChronoUnit.DAYS.between(dataCadastro, data);
 
         if (dias > 30) {
+            System.out.println("Erro: A data inserida é posterior a 30 dias de solicitação");
             return false;
         }
 
         autorizacaoExame.getExame().realizarExame(data, autorizacaoExame);
 
+        System.out.println("Autorização do exame realizado com sucesso");
         return true;
     }
 

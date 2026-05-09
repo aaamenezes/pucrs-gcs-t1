@@ -1,10 +1,17 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
+
 
 public class App {
     Usuario usuarioLogado;
     private Scanner scanner = new Scanner(System.in);
     private BancoUsuarios usuarios = new BancoUsuarios();
     private BancoAutorizacaoExames autorizacaoExames = new BancoAutorizacaoExames();
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public App() {
         login();
@@ -116,6 +123,18 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
+    //Permicao para o Paciente marcar como realizado uma autorizacao
+    private void marcarExameComoRealizadoPaciente() {
+        System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
+        String dataInserida = scanner.nextLine();
+
+        LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
+
+        autorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada, null);
+    }
+
+
+    /*--------|   INCLUSÃO DE DADOS   |--------*/
     private void incluirUsuario() {
         int opcao = 0;
         String nome;
