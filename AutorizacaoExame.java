@@ -40,8 +40,8 @@ public class AutorizacaoExame {
     public String toString(){
         return "Código: " + this.codigo + 
                          "; Data Cadastro:  " + this.dataCadastro + 
-                         "; Médico Solicitante:  " + this.medicoSolicitante 
-                             + "; Paciente: " + this.paciente +
-                             "; Exame: " + this.exame;
+                         "; Médico Solicitante:  " + this.medicoSolicitante.getNome() 
+                             + "; Paciente: " + this.paciente.getNome() +
+                             "; Exame: " + this.exame.getIdExame();
     }
 }
