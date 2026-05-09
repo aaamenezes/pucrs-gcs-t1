@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
+
 
 public class App {
     Usuario usuarioLogado;
@@ -6,10 +11,17 @@ public class App {
     private BancoUsuarios banco = new BancoUsuarios();
     private BancoAutorizacaoExames bancoAutorizacaoExames = new BancoAutorizacaoExames();
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public static void main(String[] args) {
+        new App().executar();
+    }
+
+
     public App() {
         login();
     }
-      
+
     public void executar() {
 
     }
@@ -48,8 +60,18 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
-      
- /*--------|   INCLUSÃO DE DADOS   |--------*/
+    //Permicao para o Paciente marcar como realizado uma autorizacao
+    private void marcarExameComoRealizadoPaciente() {
+        System.out.println("Para marcar como realizado o exame, insira a data do exame: ");
+        String dataInserida = scanner.nextLine();
+
+        LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
+
+        bancoAutorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada, null);
+    }
+
+
+    /*--------|   INCLUSÃO DE DADOS   |--------*/
     public void inicializarDados() {
         // ADICIONANDO 5 MÉDICOS 
         this.banco.incluirMedico("Ana Silva");
@@ -126,13 +148,13 @@ public class App {
         // Exame 9
         Exame e9 = new Exame(TipoExame.GLICEMIA_JEJUM);
         AutorizacaoExame aut9 = new AutorizacaoExame(med1, pac1, e9);
-        this.bancoAutorizacaoExames.adicionarAutorizacao(aut9); 
+        this.bancoAutorizacaoExames.adicionarAutorizacao(aut9);
 
         // Exame 10
         Exame e10 = new Exame(TipoExame.COLESTEROL_TOTAL);
         AutorizacaoExame aut10 = new AutorizacaoExame(med1, pac2, e10);
-        this.bancoAutorizacaoExames.adicionarAutorizacao(aut10);    
+        this.bancoAutorizacaoExames.adicionarAutorizacao(aut10);
     }
 
-      
+
 }
