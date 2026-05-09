@@ -19,27 +19,6 @@ public class App {
         }
     }
 
-    public void showMenu() {
-        if (this.usuarioLogado instanceof Paciente) {
-            showMenuPaciente();
-        } else if (this.usuarioLogado instanceof Medico) {
-            showMenuMedico();
-        } else if (this.usuarioLogado instanceof Administrador) {
-            showMenuAdministrador();
-        } else {
-            System.out.println("Tipo de usuário desconhecido.");
-        }
-    }
-
-    private void showMenuPaciente() {
-    }
-
-    private void showMenuMedico() {
-    }
-
-    private void showMenuAdministrador() {
-    }
-
     /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
     private void login() {
         String nome;
@@ -67,6 +46,62 @@ public class App {
 
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
+    }
+
+    public void showMenu() {
+        if (this.usuarioLogado instanceof Paciente) {
+            showMenuPaciente();
+        } else if (this.usuarioLogado instanceof Medico) {
+            showMenuMedico();
+        } else if (this.usuarioLogado instanceof Administrador) {
+            showMenuAdministrador();
+        } else {
+            System.out.println("Tipo de usuário desconhecido.");
+        }
+    }
+
+    private void showMenuPaciente() {
+    }
+
+    private void showMenuMedico() {
+    }
+
+    private void showMenuAdministrador() {
+        System.out.println("Seja bem vindo, adm. " + this.usuarioLogado.getNome() + "!");
+
+        int opcao = 0;
+
+        while (opcao <= 0 || opcao >= 5) {
+            System.out.println("Escolha uma das opções");
+            System.out.println("1 - Ver nome do usuário");
+            System.out.println("2 - Ver iniciais do usuário");
+            System.out.println("3 - Incluir usuário");
+            System.out.println("4 - Sair");
+            opcao = this.scanner.nextInt();
+            this.scanner.nextLine();
+        }
+
+        switch (opcao) {
+            case 1:
+                verNomeUsuario();
+                showMenuAdministrador();
+                break;
+            case 2:
+                verIniciaisUsuario();
+                showMenuAdministrador();
+                break;
+            case 3:
+                incluirUsuario();
+                showMenuAdministrador();
+                break;
+            case 4:
+                System.out.println("Saindo...");
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                showMenuAdministrador();
+                break;
+        }
     }
 
     private void verNomeUsuario() {
