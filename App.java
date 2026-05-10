@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -69,7 +70,35 @@ public class App {
     }
 
     private void showMenuPaciente() {
+     int opcao = 0;
+
+    while (opcao <= 0 || opcao >= 3) {
+        System.out.println("Escolha uma das opções");
+        System.out.println("1 - Listar minhas autorizações de exame");
+        System.out.println("2 - Sair");
+        opcao = this.scanner.nextInt();
+        this.scanner.nextLine();
     }
+
+    switch (opcao) {
+        case 1:
+            ArrayList<AutorizacaoExame> lista = ((Paciente) this.usuarioLogado)
+                .listarAutorizacaoExames(this.autorizacaoExames);
+            if (lista.isEmpty()) {
+                System.out.println("Nenhuma autorização encontrada.");
+            } else {
+                for (AutorizacaoExame a : lista) {
+                    System.out.println(a);
+                }
+            }
+            showMenuPaciente();
+            break;
+        case 2:
+            System.out.println("Saindo...");
+            break;
+    }
+}
+    
 
     private void showMenuMedico() {
     }
