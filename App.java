@@ -1,11 +1,9 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
-
 
 public class App {
     Usuario usuarioLogado;
@@ -259,6 +257,8 @@ public class App {
             lista = autorizacaoExames.listarAutorizacaoExamesPorTipo(tipo);
         }
 
+        lista.sort(Comparator.comparing(AutorizacaoExame::getDataCadastro));
+
         for(AutorizacaoExame a : lista){
             System.out.println(a.toString());
         }
@@ -303,6 +303,7 @@ public class App {
         Exame e1 = new Exame(TipoExame.HEMOGRAMA);
         AutorizacaoExame aut1 = new AutorizacaoExame(med1, pac1, e1);
         this.autorizacaoExames.adicionarAutorizacao(aut1);
+        aut1.setDataCadastro(LocalDate.of(2026, 2, 18));
 
         // Exame 2
         Exame e2 = new Exame(TipoExame.RAIO_X);
@@ -313,6 +314,7 @@ public class App {
         Exame e3 = new Exame(TipoExame.ULTRASSOM);
         AutorizacaoExame aut3 = new AutorizacaoExame(med2, pac1, e3);
         this.autorizacaoExames.adicionarAutorizacao(aut3);
+        aut3.setDataCadastro(LocalDate.of(2026, 2, 25));
 
         // Exame 4
         Exame e4 = new Exame(TipoExame.RESSONANCIA_MAGNETICA);
@@ -323,6 +325,7 @@ public class App {
         Exame e5 = new Exame(TipoExame.TOMOGRAFIA);
         AutorizacaoExame aut5 = new AutorizacaoExame(med1, pac1, e5);
         this.autorizacaoExames.adicionarAutorizacao(aut5);
+        aut5.setDataCadastro(LocalDate.of(2026, 3, 14));
 
         // Exame 6
         Exame e6 = new Exame(TipoExame.ELETROCARDIOGRAMA);
@@ -333,6 +336,7 @@ public class App {
         Exame e7 = new Exame(TipoExame.EXAME_SANGUE);
         AutorizacaoExame aut7 = new AutorizacaoExame(med2, pac1, e7);
         this.autorizacaoExames.adicionarAutorizacao(aut7);
+        aut7.setDataCadastro(LocalDate.of(2026, 4, 11));
 
         // Exame 8
         Exame e8 = new Exame(TipoExame.PRESSAO_ARTERIAL);
@@ -343,6 +347,7 @@ public class App {
         Exame e9 = new Exame(TipoExame.GLICEMIA_JEJUM);
         AutorizacaoExame aut9 = new AutorizacaoExame(med1, pac1, e9);
         this.autorizacaoExames.adicionarAutorizacao(aut9);
+        aut9.setDataCadastro(LocalDate.of(2026, 4, 23));
 
         // Exame 10
         Exame e10 = new Exame(TipoExame.COLESTEROL_TOTAL);
