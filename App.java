@@ -131,7 +131,7 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
-    //Permicao para o Paciente marcar como realizado uma autorizacao
+    // Permicao para o Paciente marcar como realizado uma autorizacao
     private void marcarExameComoRealizadoPaciente() {
         System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
         String dataInserida = scanner.nextLine();
@@ -141,6 +141,35 @@ public class App {
         autorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada, null);
     }
 
+    private void listarAutorizacaoExamesPorParteNomePaciente() {
+        System.out.println("Digite a parte do nome do paciente:");
+        String parteNome = scanner.nextLine();
+        Paciente paciente = this.usuarios.buscarPacientePeloNome(parteNome);
+
+        if (paciente == null) {
+            System.out.println("Paciente não encontrado.");
+            return;
+        }
+
+        for (AutorizacaoExame autorizacaoExame : autorizacaoExames.listarAutorizacaoExamesPorPaciente(paciente)) {
+            System.out.println(autorizacaoExame);
+        }
+    }
+
+    private void listarAutorizacaoExamesPorParteNomeMedico() {
+        System.out.println("Digite a parte do nome do médico:");
+        String parteNome = scanner.nextLine();
+        Medico medico = this.usuarios.buscarMedicoPeloNome(parteNome);
+
+        if (medico == null) {
+            System.out.println("Médico não encontrado.");
+            return;
+        }
+
+        for (AutorizacaoExame autorizacaoExame : autorizacaoExames.listarAutorizacaoExamesPorMedico(medico)) {
+            System.out.println(autorizacaoExame);
+        }
+    }
 
     /*--------|   INCLUSÃO DE DADOS   |--------*/
     private void incluirUsuario() {
