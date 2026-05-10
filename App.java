@@ -178,7 +178,9 @@ public class App {
 
     private void verEstatisticasSistema() {
         if (this.usuarioLogado instanceof Administrador) {
-            ((Administrador) this.usuarioLogado).verEstatisticas(this.usuarios, this.autorizacaoExames);
+            String estatisticas = ((Administrador) this.usuarioLogado).verEstatisticas(this.usuarios,
+                    this.autorizacaoExames);
+            System.out.println(estatisticas);
         } else {
             System.out.println("Apenas administradores podem acessar as estatísticas do sistema.");
         }

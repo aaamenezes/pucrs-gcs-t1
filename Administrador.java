@@ -7,7 +7,7 @@ public class Administrador extends Usuario {
         super(nome);
     }
 
-    public void verEstatisticas(BancoUsuarios bancoUsuarios, BancoAutorizacaoExames bancoExames) {
+    public String verEstatisticas(BancoUsuarios bancoUsuarios, BancoAutorizacaoExames bancoExames) {
         ArrayList<Usuario> todosUsuarios = bancoUsuarios.obterTodos();
         ArrayList<AutorizacaoExame> todosExames = bancoExames.obterTodos();
         int totalE = bancoExames.obterTotal();
@@ -31,10 +31,14 @@ public class Administrador extends Usuario {
         }
 
         double percentual = (totalE > 0) ? ((double) realizados / totalE) * 100 : 0;
-        System.out.println("Médicos cadastrados: " + medicos);
-        System.out.println("Pacientes cadastrados: " + pacientes);
-        System.out.println("Total de autorizações: " + totalE);
-        System.out.println("Exames realizados: " + percentual + "%");
+        String estatisticas = "Médicos cadastrados: " + medicos;
+        estatisticas += "\n";
+        estatisticas += "Pacientes cadastrados: " + pacientes;
+        estatisticas += "\n";
+        estatisticas += "Total de autorizações: " + totalE;
+        estatisticas += "\n";
+        estatisticas += "Exames realizados: " + percentual + "%";
+        return estatisticas;
     }
 
     public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario, BancoAutorizacaoExames bancoExames) {
