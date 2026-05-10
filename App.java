@@ -75,13 +75,15 @@ public class App {
     private void showMenuAdministrador() {
         int opcao = 0;
 
-        while (opcao <= 0 || opcao >= 5) {
+        while (opcao <= 0 || opcao >= 8) {
             System.out.println("Escolha uma das opções");
             System.out.println("1 - Ver nome do usuário");
             System.out.println("2 - Ver iniciais do usuário");
             System.out.println("3 - Incluir usuário");
-            System.out.println("4 - Trocar usuário logado");
-            System.out.println("5 - Sair");
+            System.out.println("4 - Listar autorizações de exames de paciente");
+            System.out.println("5 - Listar autorizações de exames de médico");
+            System.out.println("6 - Trocar usuário logado");
+            System.out.println("7 - Sair");
             opcao = this.scanner.nextInt();
             this.scanner.nextLine();
         }
@@ -100,10 +102,18 @@ public class App {
                 showMenuAdministrador();
                 break;
             case 4:
+                listarAutorizacaoExamesPorParteNomePaciente();
+                showMenuAdministrador();
+                break;
+            case 5:
+                listarAutorizacaoExamesPorParteNomeMedico();
+                showMenuAdministrador();
+                break;
+            case 6:
                 login();
                 mostrarMenu();
                 break;
-            case 5:
+            case 7:
                 System.out.println("Saindo...");
                 break;
             default:
