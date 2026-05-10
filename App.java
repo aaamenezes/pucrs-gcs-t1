@@ -18,7 +18,7 @@ public class App {
     }
 
     public void executar() {
-        inicializarDados(); //para os testes
+        inicializarDados(); // para os testes
         if (this.usuarioLogado != null) {
             mostrarMenu();
         } else {
@@ -29,34 +29,35 @@ public class App {
 
     /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
     private void login() {
-        String nome;
-        int opcao = 0;
-
-        while (opcao <= 0 || opcao >= 4) {
-            System.out.println("Escolha uma opção:");
-            System.out.println("1 - Paciente");
-            System.out.println("2 - Medico");
-            System.out.println("3 - Administrador");
-            opcao = this.scanner.nextInt();
-            this.scanner.nextLine();
-        }
+        System.out.println("Escolha uma opção:");
+        System.out.println("1 - Paciente");
+        System.out.println("2 - Medico");
+        System.out.println("3 - Administrador");
+        int opcao = validaOp(1, 3);
 
         System.out.println("Digite o nome do usuário:");
-        nome = this.scanner.nextLine();
+        String nome = this.scanner.nextLine();
 
-        if (opcao == 1) {
-            this.usuarioLogado = new Paciente(nome);
-        } else if (opcao == 2) {
-            this.usuarioLogado = new Medico(nome);
-        } else if (opcao == 3) {
-            this.usuarioLogado = new Administrador(nome);
+        switch (opcao) {
+            case 1:
+                this.usuarioLogado = new Paciente(nome);
+                break;
+            case 2:
+                this.usuarioLogado = new Medico(nome);
+                break;
+            case 3:
+                this.usuarioLogado = new Administrador(nome);
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                login();
+                return;
         }
 
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
-        System.out.println("Seja bem vindo, " + this.usuarioLogado.getNome() + "!");
+        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
     }
-
 
     /* -------| MENUS |------- */
     public void mostrarMenu() {
@@ -76,7 +77,7 @@ public class App {
 
     private void showMenuMedico() {
         int op = 0;
-        do{
+        do {
             System.out.println("\n|-----| [1] Incluir autorização de exame");
             System.out.println("|-----| [2] Listar autorizações");
             System.out.println("|-----| [0] Voltar");
@@ -94,7 +95,7 @@ public class App {
                 default:
                     break;
             }
-        } while(op != 0);
+        } while (op != 0);
     }
 
     private void showMenuAdministrador() {
@@ -147,7 +148,6 @@ public class App {
                 break;
         }
     }
-
 
     /* ------| OUTROS MÉTODOS |------ */
     private void verNomeUsuario() {
@@ -228,9 +228,9 @@ public class App {
         System.out.println("Usuário " + nome + " incluído com sucesso!");
     }
 
-    public TipoExame selecionaTipoExame(){
+    public TipoExame selecionaTipoExame() {
         TipoExame tipo;
-        for (int i = 0; i < TipoExame.values().length; i++){
+        for (int i = 0; i < TipoExame.values().length; i++) {
             System.out.println("|-----| [" + i + "] " + TipoExame.values()[i].getDescricao());
         }
 
@@ -241,23 +241,23 @@ public class App {
         return tipo;
     }
 
-    public int validaOp(int min, int max){
+    public int validaOp(int min, int max) {
         int op = this.scanner.nextInt();
-        while(op < min || op > max){
+        while (op < min || op > max) {
             System.out.print("Opção inválida. Tente novamente: ");
             op = this.scanner.nextInt();
+            this.scanner.nextLine();
         }
         return op;
     }
 
-
     /* ------| FUNCIONALIDADES MÉDICO |------ */
-    public void incluirAutorizacao(Usuario user){
+    public void incluirAutorizacao(Usuario user) {
         System.out.print("Digite o nome do paciente: ");
         this.scanner.nextLine();
         String pac = this.scanner.nextLine();
         Usuario u = usuarios.buscarPacientePeloNome(pac);
-        if(u == null){
+        if (u == null) {
             System.out.println("Paciente não encontrado.");
             return;
         }
@@ -275,17 +275,17 @@ public class App {
         System.out.println(autorizacao.toString());
     }
 
-    public void listarAutorizacoes(){
+    public void listarAutorizacoes() {
         System.out.println("\nDeseja listar por:");
         System.out.println("[1] Paciente\n[2] Tipo de Exame");
         int op = validaOp(1, 2);
         ArrayList<AutorizacaoExame> lista;
-        if(op == 1){
+        if (op == 1) {
             System.out.print("Digite o nome do paciente: ");
             this.scanner.nextLine();
             String pac = this.scanner.nextLine();
             Paciente paciente = usuarios.buscarPacientePeloNome(pac);
-            if(paciente == null){
+            if (paciente == null) {
                 System.out.println("Paciente não encontrado.");
                 return;
             }
@@ -296,11 +296,10 @@ public class App {
             lista = autorizacaoExames.listarAutorizacaoExamesPorTipo(tipo);
         }
 
-        for(AutorizacaoExame a : lista){
+        for (AutorizacaoExame a : lista) {
             System.out.println(a.toString());
         }
     }
-
 
     /*--------|   INCLUSÃO DE DADOS   |--------*/
     public void inicializarDados() {
