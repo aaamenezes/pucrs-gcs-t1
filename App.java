@@ -75,15 +75,16 @@ public class App {
     private void showMenuAdministrador() {
         int opcao = 0;
 
-        while (opcao <= 0 || opcao >= 8) {
+        while (opcao <= 0 || opcao >= 9) {
             System.out.println("Escolha uma das opções");
             System.out.println("1 - Ver nome do usuário");
             System.out.println("2 - Ver iniciais do usuário");
             System.out.println("3 - Incluir usuário");
             System.out.println("4 - Listar autorizações de exames de paciente");
             System.out.println("5 - Listar autorizações de exames de médico");
-            System.out.println("6 - Trocar usuário logado");
-            System.out.println("7 - Sair");
+            System.out.println("6 - Ver estatísticas do sistema");
+            System.out.println("7 - Trocar usuário logado");
+            System.out.println("8 - Sair");
             opcao = this.scanner.nextInt();
             this.scanner.nextLine();
         }
@@ -110,10 +111,14 @@ public class App {
                 showMenuAdministrador();
                 break;
             case 6:
+                verEstatisticasSistema();
+                showMenuAdministrador();
+                break;
+            case 7:
                 login();
                 mostrarMenu();
                 break;
-            case 7:
+            case 8:
                 System.out.println("Saindo...");
                 break;
             default:
@@ -168,6 +173,14 @@ public class App {
 
         for (AutorizacaoExame autorizacaoExame : autorizacaoExames.listarAutorizacaoExamesPorMedico(medico)) {
             System.out.println(autorizacaoExame);
+        }
+    }
+
+    private void verEstatisticasSistema() {
+        if (this.usuarioLogado instanceof Administrador) {
+            ((Administrador) this.usuarioLogado).verEstatisticas(this.usuarios, this.autorizacaoExames);
+        } else {
+            System.out.println("Apenas administradores podem acessar as estatísticas do sistema.");
         }
     }
 
