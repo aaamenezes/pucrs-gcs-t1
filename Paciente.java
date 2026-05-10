@@ -20,5 +20,5 @@ public class Paciente extends Usuario {
     ArrayList<AutorizacaoExame> lista = banco.listarAutorizacaoExamesPorPaciente(this);
     lista.sort((a, b) -> a.getDataCadastro().compareTo(b.getDataCadastro()));
     return lista;
-}
     }
+}
