@@ -2,9 +2,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-
-
 public class App {
     Usuario usuarioLogado;
     private Scanner scanner = new Scanner(System.in);
@@ -15,6 +12,7 @@ public class App {
 
     public App() {
         login();
+        inicializarDados();
     }
 
     public void executar() {
