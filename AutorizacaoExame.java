@@ -36,6 +36,8 @@ public class AutorizacaoExame {
         return this.exame;
     }
 
+    public void setDataCadastro(LocalDate dataCadastro){this.dataCadastro = dataCadastro;}
+
     @Override
     public String toString(){
         return "Código: " + this.codigo + 
