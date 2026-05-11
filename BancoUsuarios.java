@@ -44,7 +44,7 @@ public class BancoUsuarios {
             if (usuarios.get(i) instanceof Medico) {
                 Medico m = (Medico) usuarios.get(i);
 
-                if (m.getNome().equalsIgnoreCase(nome)) {
+                if (m.getNome().toLowerCase().contains(nome.toLowerCase())) {
                     return m;
                 }
             }
@@ -57,7 +57,7 @@ public class BancoUsuarios {
             if (usuarios.get(i) instanceof Paciente) {
                 Paciente p = (Paciente) usuarios.get(i);
 
-                if (p.getNome().equalsIgnoreCase(nome)) {
+                if (p.getNome().toLowerCase().contains(nome.toLowerCase())) {
                     return p;
                 }
             }
