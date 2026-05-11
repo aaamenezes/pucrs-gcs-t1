@@ -36,12 +36,14 @@ public class AutorizacaoExame {
         return this.exame;
     }
 
+    public void setDataCadastro(LocalDate dataCadastro){this.dataCadastro = dataCadastro;}
+
     @Override
     public String toString(){
         return "Código: " + this.codigo + 
                          "; Data Cadastro:  " + this.dataCadastro + 
-                         "; Médico Solicitante:  " + this.medicoSolicitante 
-                             + "; Paciente: " + this.paciente +
-                             "; Exame: " + this.exame;
+                         "; Médico Solicitante:  " + this.medicoSolicitante.getNome() 
+                             + "; Paciente: " + this.paciente.getNome() +
+                             "; Exame: " + this.exame.getIdExame();
     }
 }
