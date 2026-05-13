@@ -15,13 +15,12 @@ public abstract class Usuario {
         StringBuilder inicial = new StringBuilder();
         for (String parte : partesNome) {
             if (!parte.isEmpty()) {
-                inicial.append(parte.charAt(0)); // pega a primeira letra de cada parte do nome
+                inicial.append(parte.charAt(0));
             }
         }
-        return inicial.toString().toUpperCase(); // retorna as iniciais em maiúsculo
+        return inicial.toString().toUpperCase();
     }
 
-    // deixei uns gets aqui caso fosse necessario, qualquer coisa apaga
     public String getNome() {
         return this.nome;
     }

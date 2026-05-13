@@ -8,8 +8,8 @@ public class Administrador extends Usuario {
 
     public void verEstatisticas(BancoUsuarios bancoUsuarios, BancoAutorizacaoExames bancoExames) {
         ArrayList<Usuario> todosUsuarios = bancoUsuarios.obterTodos();
-        ArrayList<AutorizacaoExame> todosExames = bancoExames.obterTodos();
-        int totalE = bancoExames.obterTotal();
+        ArrayList<AutorizacaoExame> todosExames = bancoExames.listarAutorizacaoExames();
+        int totalExames = todosExames.size();
 
         int medicos = 0;
         int pacientes = 0;
@@ -24,19 +24,20 @@ public class Administrador extends Usuario {
         }
 
         for (AutorizacaoExame exame : todosExames) {
-            if (exame.getExame().isRealizado()) {
+            if (exame.getExame().getRealizado()) {
                 realizados++;
             }
         }
 
-        double percentual = (totalE > 0) ? ((double) realizados / totalE) * 100 : 0;
+        double percentual = (totalExames > 0) ? ((double) realizados / totalExames) * 100 : 0;
         System.out.println("Médicos cadastrados: " + medicos);
         System.out.println("Pacientes cadastrados: " + pacientes);
-        System.out.println("Total de autorizações: " + totalE);
+        System.out.println("Total de autorizações: " + totalExames);
         System.out.println("Exames realizados: " + percentual + "%");
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(Usuario usuario, BancoAutorizacaoExames bancoExames) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorUsuario(Usuario usuario,
+            BancoAutorizacaoExames bancoExames) {
         if (usuario instanceof Medico) {
             return bancoExames.listarAutorizacaoExamesPorMedico((Medico) usuario);
         } else if (usuario instanceof Paciente) {

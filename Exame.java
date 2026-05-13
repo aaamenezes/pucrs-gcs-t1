@@ -5,17 +5,17 @@ public class Exame {
 
     private static int id = 1;
 
-    private AutorizacaoExame autorizacao;
+    private AutorizacaoExame autorizacaoExame;
     private int idExame;
     private LocalDate dataRealizacao;
     private boolean realizado;
     private TipoExame tipoExame;
 
     public Exame(TipoExame tipoExame) {
-        dataRealizacao = null;
-        realizado = false;
+        this.dataRealizacao = null;
+        this.realizado = false;
         this.tipoExame = tipoExame;
-        idExame = id;
+        this.idExame = id;
         id++;
     }
 
@@ -27,7 +27,7 @@ public class Exame {
         return this.tipoExame;
     }
 
-    public boolean isRealizado() {
+    public boolean getRealizado() {
         return this.realizado;
     }
 
@@ -55,7 +55,7 @@ public class Exame {
             throw new IllegalArgumentException("Erro: O exame só pode ser realizado dentro de 30 dias.");
 
         this.dataRealizacao = dataRealizacao;
-        this.autorizacao = autorizacao;
+        this.autorizacaoExame = autorizacao;
         realizado = true;
     }
 
@@ -63,11 +63,11 @@ public class Exame {
         String retorno = "Id: " + this.idExame +
                 "; Tipo de Exame: " + this.tipoExame +
                 "; Status: " + this.realizado;
-        if (autorizacao == null)
+        if (autorizacaoExame == null)
             return retorno;
         else
             return retorno + "; Data Realizacao: " + this.dataRealizacao +
-                    "; Id da autorizacao: " + this.autorizacao.getCodigo();
+                    "; Id da autorizacao: " + this.autorizacaoExame.getCodigo();
     }
 
 }

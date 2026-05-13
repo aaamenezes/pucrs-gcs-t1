@@ -18,7 +18,6 @@ public class App {
     }
 
     public void executar() {
-        inicializarDados(); // para os testes
         if (this.usuarioLogado != null) {
             mostrarMenu();
         } else {
@@ -185,7 +184,6 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
-    // Permicao para o Paciente marcar como realizado uma autorizacao
     private void marcarExameComoRealizadoPaciente() {
         System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
         String dataInserida = scanner.nextLine();
