@@ -16,7 +16,7 @@ public class Paciente extends Usuario {
     }
 
     // Listar autorizações exames
-      public ArrayList<AutorizacaoExame> listarAutorizacaoExames(BancoAutorizacaoExames banco) {
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(BancoAutorizacaoExames banco) {
         ArrayList<AutorizacaoExame> lista = banco.listarAutorizacaoExamesPorPaciente(this);
         lista.sort((a, b) -> a.getDataCadastro().compareTo(b.getDataCadastro()));
         return lista;

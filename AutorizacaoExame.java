@@ -14,36 +14,40 @@ public class AutorizacaoExame {
         this.exame = exame;
 
         this.dataCadastro = LocalDate.now();
-        this.codigo =  contadorSequencial;
+        this.codigo = contadorSequencial;
         contadorSequencial++;
     }
-
-
 
     public int getCodigo() {
         return this.codigo;
     }
-    public LocalDate getDataCadastro(){
+
+    public LocalDate getDataCadastro() {
         return this.dataCadastro;
     }
+
     public Medico getMedicoSolicitante() {
         return this.medicoSolicitante;
     }
+
     public Paciente getPaciente() {
         return this.paciente;
     }
+
     public Exame getExame() {
         return this.exame;
     }
 
-    public void setDataCadastro(LocalDate dataCadastro){this.dataCadastro = dataCadastro;}
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 
     @Override
-    public String toString(){
-        return "Código: " + this.codigo + 
-                         "; Data Cadastro:  " + this.dataCadastro + 
-                         "; Médico Solicitante:  " + this.medicoSolicitante.getNome() 
-                             + "; Paciente: " + this.paciente.getNome() +
-                             "; Exame: " + this.exame.getIdExame();
+    public String toString() {
+        return "Código: " + this.codigo +
+                "; Data Cadastro:  " + this.dataCadastro +
+                "; Médico Solicitante:  " + this.medicoSolicitante.getNome()
+                + "; Paciente: " + this.paciente.getNome() +
+                "; Exame: " + this.exame.getIdExame();
     }
 }
