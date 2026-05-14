@@ -72,15 +72,10 @@ public class App {
     }
 
     private void showMenuPaciente() {
-        int opcao = 0;
-
-        while (opcao <= 0 || opcao >= 3) {
-            System.out.println("Escolha uma das opções");
-            System.out.println("1 - Listar minhas autorizações de exame");
-            System.out.println("2 - Sair");
-            opcao = this.scanner.nextInt();
-            this.scanner.nextLine();
-        }
+        System.out.println("Escolha uma das opções");
+        System.out.println("1 - Listar minhas autorizações de exame");
+        System.out.println("2 - Sair");
+        int opcao = validaOp(1, 2);
 
         switch (opcao) {
             case 1:
@@ -114,7 +109,7 @@ public class App {
                     incluirAutorizacao(usuarioLogado);
                     break;
                 case 2:
-                    listarAutorizacoes();
+                    listarAutorizacaoExames();
                     break;
                 case 0:
                     break;
@@ -300,7 +295,7 @@ public class App {
         System.out.println(autorizacao.toString());
     }
 
-    public void listarAutorizacoes() {
+    public void listarAutorizacaoExames() {
         System.out.println("\nDeseja listar por:");
         System.out.println("[1] Paciente\n[2] Tipo de Exame");
         int op = validaOp(1, 2);
