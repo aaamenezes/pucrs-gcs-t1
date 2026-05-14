@@ -28,12 +28,10 @@ public class App {
         System.out.println("3 - Administrador");
         int opcao = validaOp(1, 3);
 
-        System.out.println("Digite o nome do usuário:");
-        String nome = this.scanner.nextLine();
-
         switch (opcao) {
             case 1:
-                this.usuarioLogado = new Paciente(nome);
+                selecionarPaciente();
+                mostrarMenuPaciente();
                 break;
             case 2:
                 this.usuarioLogado = new Medico(nome);
@@ -46,29 +44,28 @@ public class App {
                 login();
                 return;
         }
+    }
+
+    private void selecionarPaciente() {
+        System.out.println("Escolha o paciente:\n");
+        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+
+        for (Usuario usuario : this.usuarios.listar()) {
+            if (usuario instanceof Paciente) {
+                pacientes.add((Paciente) usuario);
+                System.out.println(pacientes.size() + " - " + usuario.getNome());
+            }
+        }
+        int opcao = validaOp(1, pacientes.size());
+        this.usuarioLogado = pacientes.get(opcao - 1);
 
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
         System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
-        mostrarMenu();
-    }
-
-    /* -------| MENUS |------- */
-    public void mostrarMenu() {
-        if (this.usuarioLogado instanceof Paciente) {
-            mostrarMenuPaciente();
-        } else if (this.usuarioLogado instanceof Medico) {
-            mostrarMenuMedico();
-        } else if (this.usuarioLogado instanceof Administrador) {
-            mostrarMenuAdministrador();
-        } else {
-            System.out.println("Tipo de usuário desconhecido.");
-            login();
-        }
     }
 
     private void mostrarMenuPaciente() {
-        System.out.println("Escolha uma das opções");
+        System.out.println("O que você deseja fazer?\n");
         System.out.println("1 - Listar minhas autorizações de exame");
         System.out.println("2 - Trocar usuário");
         System.out.println("3 - Sair");
