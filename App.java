@@ -13,17 +13,11 @@ public class App {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public App() {
-        login();
         inicializarDados();
     }
 
     public void executar() {
-        if (this.usuarioLogado != null) {
-            mostrarMenu();
-        } else {
-            System.out.println("Nenhum usuário logado. Faça login para acessar o sistema.");
-            login();
-        }
+        login();
     }
 
     /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
@@ -56,6 +50,7 @@ public class App {
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
         System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+        mostrarMenu();
     }
 
     /* -------| MENUS |------- */
@@ -68,14 +63,16 @@ public class App {
             showMenuAdministrador();
         } else {
             System.out.println("Tipo de usuário desconhecido.");
+            login();
         }
     }
 
     private void showMenuPaciente() {
         System.out.println("Escolha uma das opções");
         System.out.println("1 - Listar minhas autorizações de exame");
-        System.out.println("2 - Sair");
-        int opcao = validaOp(1, 2);
+        System.out.println("2 - Trocar usuário");
+        System.out.println("3 - Sair");
+        int opcao = validaOp(1, 3);
 
         switch (opcao) {
             case 1:
@@ -91,6 +88,9 @@ public class App {
                 showMenuPaciente();
                 break;
             case 2:
+                login();
+                break;
+            case 3:
                 System.out.println("Saindo...");
                 break;
         }
@@ -158,7 +158,6 @@ public class App {
                 break;
             case 6:
                 login();
-                mostrarMenu();
                 break;
             case 7:
                 System.out.println("Saindo...");
