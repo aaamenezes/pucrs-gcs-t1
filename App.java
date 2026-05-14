@@ -56,18 +56,18 @@ public class App {
     /* -------| MENUS |------- */
     public void mostrarMenu() {
         if (this.usuarioLogado instanceof Paciente) {
-            showMenuPaciente();
+            mostrarMenuPaciente();
         } else if (this.usuarioLogado instanceof Medico) {
-            showMenuMedico();
+            mostrarMenuMedico();
         } else if (this.usuarioLogado instanceof Administrador) {
-            showMenuAdministrador();
+            mostrarMenuAdministrador();
         } else {
             System.out.println("Tipo de usuário desconhecido.");
             login();
         }
     }
 
-    private void showMenuPaciente() {
+    private void mostrarMenuPaciente() {
         System.out.println("Escolha uma das opções");
         System.out.println("1 - Listar minhas autorizações de exame");
         System.out.println("2 - Trocar usuário");
@@ -85,7 +85,7 @@ public class App {
                         System.out.println(a);
                     }
                 }
-                showMenuPaciente();
+                mostrarMenuPaciente();
                 break;
             case 2:
                 login();
@@ -96,7 +96,7 @@ public class App {
         }
     }
 
-    private void showMenuMedico() {
+    private void mostrarMenuMedico() {
         int op = 0;
         do {
             System.out.println("\n|-----| [1] Incluir autorização de exame");
@@ -119,7 +119,7 @@ public class App {
         } while (op != 0);
     }
 
-    private void showMenuAdministrador() {
+    private void mostrarMenuAdministrador() {
         int opcao = 0;
 
         while (opcao <= 0 || opcao >= 8) {
@@ -138,23 +138,23 @@ public class App {
         switch (opcao) {
             case 1:
                 verNomeUsuario();
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
             case 2:
                 verIniciaisUsuario();
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
             case 3:
                 incluirUsuario();
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
             case 4:
                 listarAutorizacaoExamesPorParteNomePaciente();
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
             case 5:
                 listarAutorizacaoExamesPorParteNomeMedico();
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
             case 6:
                 login();
@@ -164,7 +164,7 @@ public class App {
                 break;
             default:
                 System.out.println("Opção inválida. Tente novamente.");
-                showMenuAdministrador();
+                mostrarMenuAdministrador();
                 break;
         }
     }
