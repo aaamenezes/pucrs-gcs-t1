@@ -263,11 +263,14 @@ public class App {
 
     public int validaOp(int min, int max) {
         int op = this.scanner.nextInt();
+        this.scanner.nextLine();
+
         while (op < min || op > max) {
             System.out.print("Opção inválida. Tente novamente: ");
             op = this.scanner.nextInt();
             this.scanner.nextLine();
         }
+
         return op;
     }
 
