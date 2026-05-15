@@ -38,7 +38,8 @@ public class App {
                 mostrarMenuMedico();
                 break;
             case 3:
-                // this.usuarioLogado = new Administrador(nome);
+                selecionarAdministrador();
+                mostrarMenuAdministrador();
                 break;
             default:
                 System.out.println("Opção inválida. Tente novamente.");
@@ -133,21 +134,34 @@ public class App {
         }
     }
 
-    private void mostrarMenuAdministrador() {
-        int opcao = 0;
+    private void selecionarAdministrador() {
+        System.out.println("\nEscolha o administrador:\n");
+        ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 
-        while (opcao <= 0 || opcao >= 8) {
-            System.out.println("Escolha uma das opções");
-            System.out.println("1 - Ver nome do usuário");
-            System.out.println("2 - Ver iniciais do usuário");
-            System.out.println("3 - Incluir usuário");
-            System.out.println("4 - Listar autorizações de exames de paciente");
-            System.out.println("5 - Listar autorizações de exames de médico");
-            System.out.println("6 - Trocar usuário logado");
-            System.out.println("7 - Sair");
-            opcao = this.scanner.nextInt();
-            this.scanner.nextLine();
+        for (Usuario usuario : this.usuarios.listar()) {
+            if (usuario instanceof Administrador) {
+                administradores.add((Administrador) usuario);
+                System.out.println(administradores.size() + " - " + usuario.getNome());
+            }
         }
+        int opcao = validaOp(1, administradores.size());
+        this.usuarioLogado = administradores.get(opcao - 1);
+
+        System.out.println("Administrador logado: " + this.usuarioLogado.getNome());
+        System.out.println("Iniciais do administrador: " + this.usuarioLogado.getIniciais());
+        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+    }
+
+    private void mostrarMenuAdministrador() {
+        System.out.println("\nO que você deseja fazer?\n");
+        System.out.println("1 - Ver nome do usuário");
+        System.out.println("2 - Ver iniciais do usuário");
+        System.out.println("3 - Incluir usuário");
+        System.out.println("4 - Listar autorizações de exames de paciente");
+        System.out.println("5 - Listar autorizações de exames de médico");
+        System.out.println("6 - Trocar usuário logado");
+        System.out.println("7 - Sair");
+        int opcao = validaOp(1, 7);
 
         switch (opcao) {
             case 1:
