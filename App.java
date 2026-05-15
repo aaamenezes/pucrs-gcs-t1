@@ -22,7 +22,7 @@ public class App {
 
     /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
     private void login() {
-        System.out.println("Escolha uma opção:");
+        System.out.println("\nEscolha uma opção:\n");
         System.out.println("1 - Paciente");
         System.out.println("2 - Medico");
         System.out.println("3 - Administrador");
@@ -34,10 +34,11 @@ public class App {
                 mostrarMenuPaciente();
                 break;
             case 2:
-                this.usuarioLogado = new Medico(nome);
+                selecionarMedico();
+                mostrarMenuMedico();
                 break;
             case 3:
-                this.usuarioLogado = new Administrador(nome);
+                // this.usuarioLogado = new Administrador(nome);
                 break;
             default:
                 System.out.println("Opção inválida. Tente novamente.");
@@ -47,7 +48,7 @@ public class App {
     }
 
     private void selecionarPaciente() {
-        System.out.println("Escolha o paciente:\n");
+        System.out.println("\nEscolha o paciente:\n");
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
         for (Usuario usuario : this.usuarios.listar()) {
@@ -59,13 +60,13 @@ public class App {
         int opcao = validaOp(1, pacientes.size());
         this.usuarioLogado = pacientes.get(opcao - 1);
 
-        System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
-        System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
+        System.out.println("Paciente logado: " + this.usuarioLogado.getNome());
+        System.out.println("Iniciais do paciente: " + this.usuarioLogado.getIniciais());
         System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
     }
 
     private void mostrarMenuPaciente() {
-        System.out.println("O que você deseja fazer?\n");
+        System.out.println("\nO que você deseja fazer?\n");
         System.out.println("1 - Listar minhas autorizações de exame");
         System.out.println("2 - Trocar usuário");
         System.out.println("3 - Sair");
@@ -93,27 +94,43 @@ public class App {
         }
     }
 
-    private void mostrarMenuMedico() {
-        int op = 0;
-        do {
-            System.out.println("\n|-----| [1] Incluir autorização de exame");
-            System.out.println("|-----| [2] Listar autorizações");
-            System.out.println("|-----| [0] Voltar");
-            op = validaOp(0, 2);
+    private void selecionarMedico() {
+        System.out.println("\nEscolha o médico:\n");
+        ArrayList<Medico> medicos = new ArrayList<Medico>();
 
-            switch (op) {
-                case 1:
-                    incluirAutorizacao(usuarioLogado);
-                    break;
-                case 2:
-                    listarAutorizacaoExames();
-                    break;
-                case 0:
-                    break;
-                default:
-                    break;
+        for (Usuario usuario : this.usuarios.listar()) {
+            if (usuario instanceof Medico) {
+                medicos.add((Medico) usuario);
+                System.out.println(medicos.size() + " - " + usuario.getNome());
             }
-        } while (op != 0);
+        }
+        int opcao = validaOp(1, medicos.size());
+        this.usuarioLogado = medicos.get(opcao - 1);
+
+        System.out.println("Médico logado: " + this.usuarioLogado.getNome());
+        System.out.println("Iniciais do médico: " + this.usuarioLogado.getIniciais());
+        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+    }
+
+    private void mostrarMenuMedico() {
+        System.out.println("\nO que você deseja fazer?\n");
+        System.out.println("1 - Incluir autorização de exame");
+        System.out.println("2 - Listar autorizações");
+        System.out.println("3 - Sair");
+        int op = validaOp(1, 3);
+
+        switch (op) {
+            case 1:
+                incluirAutorizacao(usuarioLogado);
+                break;
+            case 2:
+                listarAutorizacaoExames();
+                break;
+            case 0:
+                break;
+            default:
+                break;
+        }
     }
 
     private void mostrarMenuAdministrador() {
