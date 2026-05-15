@@ -288,20 +288,14 @@ public class App {
 
     /*--------|   INCLUSÃO DE DADOS   |--------*/
     private void incluirUsuario() {
-        int opcao = 0;
-        String nome;
-
-        while (opcao <= 0 || opcao >= 4) {
-            System.out.println("Qual o tipo de usuário a ser incluído?");
-            System.out.println("1 - Paciente");
-            System.out.println("2 - Medico");
-            System.out.println("3 - Administrador");
-            opcao = this.scanner.nextInt();
-            this.scanner.nextLine();
-        }
+        System.out.println("\nQual o tipo de usuário a ser incluído?\n");
+        System.out.println("1 - Paciente");
+        System.out.println("2 - Medico");
+        System.out.println("3 - Administrador");
+        int opcao = validaOp(1, 3);
 
         System.out.println("Digite o nome do novo usuário:");
-        nome = this.scanner.nextLine();
+        String nome = this.scanner.nextLine();
         Usuario novoUsuario = null;
 
         if (opcao == 1) {
