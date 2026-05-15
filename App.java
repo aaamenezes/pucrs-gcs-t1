@@ -20,7 +20,6 @@ public class App {
         login();
     }
 
-    /*------|   MÉTODO GERENCIADOR DE LOGIN ATIVO  |------*/
     private void login() {
         System.out.println("\nEscolha uma opção:\n");
         System.out.println("1 - Paciente");
@@ -167,9 +166,10 @@ public class App {
         System.out.println("3 - Incluir usuário");
         System.out.println("4 - Listar autorizações de exames de paciente");
         System.out.println("5 - Listar autorizações de exames de médico");
-        System.out.println("6 - Trocar usuário logado");
-        System.out.println("7 - Sair");
-        int opcao = validaOp(1, 7);
+        System.out.println("6 - Ver estatísticas");
+        System.out.println("7 - Trocar usuário logado");
+        System.out.println("8 - Sair");
+        int opcao = validaOp(1, 8);
 
         switch (opcao) {
             case 1:
@@ -193,9 +193,12 @@ public class App {
                 mostrarMenuAdministrador();
                 break;
             case 6:
+                verEstatisticas();
+                mostrarMenuAdministrador();
+            case 7:
                 login();
                 break;
-            case 7:
+            case 8:
                 System.out.println("Saindo...");
                 break;
             default:
@@ -224,7 +227,6 @@ public class App {
         System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
     }
 
-    /* ------| OUTROS MÉTODOS |------ */
     private void verNomeUsuario() {
         System.out.println(this.usuarioLogado.getNome());
     }
@@ -286,7 +288,6 @@ public class App {
         }
     }
 
-    /*--------|   INCLUSÃO DE DADOS   |--------*/
     private void incluirUsuario() {
         System.out.println("\nQual o tipo de usuário a ser incluído?\n");
         System.out.println("1 - Paciente");
@@ -323,7 +324,6 @@ public class App {
         return op;
     }
 
-    /* ------| FUNCIONALIDADES MÉDICO |------ */
     public void incluirAutorizacao(Medico medico) {
         System.out.print("\nEscolha o paciente:\n");
 
@@ -373,7 +373,6 @@ public class App {
         mostrarMenuMedico();
     }
 
-    /*--------|   INCLUSÃO DE DADOS   |--------*/
     public void inicializarDados() {
         // ADICIONANDO 5 MÉDICOS
         this.usuarios.incluirMedico("Ana Silva");
@@ -461,5 +460,12 @@ public class App {
         Exame e10 = new Exame(TipoExame.COLESTEROL_TOTAL);
         AutorizacaoExame aut10 = new AutorizacaoExame(med1, pac2, e10);
         this.autorizacaoExames.adicionarAutorizacao(aut10);
+    }
+
+    private void verEstatisticas() {
+        if (this.usuarioLogado instanceof Administrador) {
+            Administrador administrador = (Administrador) this.usuarioLogado;
+            administrador.verEstatisticas(usuarios, autorizacaoExames);
+        }
     }
 }
