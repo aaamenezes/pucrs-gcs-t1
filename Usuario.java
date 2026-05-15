@@ -1,28 +1,26 @@
 public abstract class Usuario {
-    private final String nome; //deixei final pelo o que entendi nao vamos alterar cadastro.
+    private final String nome;
     private final String iniciais;
     private final int id;
-    private static int incrementoId= 1;
-   
+    private static int incrementoId = 1;
+
     public Usuario(String nome) {
         this.nome = nome;
         this.iniciais = geradorIniciais(nome);
-        this.id = incrementoId++; //id autoincrementado
+        this.id = incrementoId++; // id autoincrementado
     }
 
-    
     private String geradorIniciais(String nome) {
         String[] partesNome = nome.split(" ");
         StringBuilder inicial = new StringBuilder();
         for (String parte : partesNome) {
             if (!parte.isEmpty()) {
-                inicial.append(parte.charAt(0)); //pega a primeira letra de cada parte do nome
+                inicial.append(parte.charAt(0));
             }
         }
-        return inicial.toString().toUpperCase(); //retorna as iniciais em maiúsculo
+        return inicial.toString().toUpperCase();
     }
 
-    //deixei uns gets aqui caso fosse necessario, qualquer coisa apaga
     public String getNome() {
         return this.nome;
     }

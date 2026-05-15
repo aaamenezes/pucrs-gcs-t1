@@ -1,4 +1,3 @@
-
 public enum TipoExame {
     RAIO_X("Raio x"),
     TOMOGRAFIA("Tomografia"),

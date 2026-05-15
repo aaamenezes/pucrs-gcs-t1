@@ -10,7 +10,7 @@ public class Medico extends Usuario {
         return banco.adicionarAutorizacao(autorizacaoExame);
     }
 
-    public ArrayList<AutorizacaoExame> listarAutorizacaoExames(
+    public ArrayList<AutorizacaoExame> listarAutorizacaoExamesPorPaciente(
             BancoAutorizacaoExames banco,
             Paciente paciente) {
         return banco.listarAutorizacaoExamesPorPaciente(paciente);
