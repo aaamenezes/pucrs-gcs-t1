@@ -117,8 +117,9 @@ public class App {
         System.out.println("\nO que você deseja fazer?\n");
         System.out.println("1 - Incluir autorização de exame");
         System.out.println("2 - Listar autorizações");
-        System.out.println("3 - Sair");
-        int op = validaOp(1, 3);
+        System.out.println("3 - Trocar usuário");
+        System.out.println("4 - Sair");
+        int op = validaOp(1, 4);
 
         switch (op) {
             case 1:
@@ -127,7 +128,10 @@ public class App {
             case 2:
                 listarAutorizacaoExames();
                 break;
-            case 0:
+            case 3:
+                login();
+                break;
+            case 4:
                 break;
             default:
                 break;
