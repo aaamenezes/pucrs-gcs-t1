@@ -123,7 +123,7 @@ public class App {
 
         switch (op) {
             case 1:
-                incluirAutorizacao(usuarioLogado);
+                incluirAutorizacao((Medico) usuarioLogado);
                 break;
             case 2:
                 listarAutorizacaoExames();
@@ -282,10 +282,10 @@ public class App {
     public TipoExame selecionaTipoExame() {
         TipoExame tipo;
         for (int i = 0; i < TipoExame.values().length; i++) {
-            System.out.println("|-----| [" + i + "] " + TipoExame.values()[i].getDescricao());
+            System.out.println(i + 1 + " - " + TipoExame.values()[i].getDescricao());
         }
 
-        int exame = validaOp(0, 19);
+        int exame = validaOp(1, TipoExame.values().length) - 1;
 
         tipo = TipoExame.values()[exame];
 
@@ -306,22 +306,29 @@ public class App {
     }
 
     /* ------| FUNCIONALIDADES MÉDICO |------ */
-    public void incluirAutorizacao(Usuario user) {
-        System.out.print("Digite o nome do paciente: ");
-        this.scanner.nextLine();
-        String pac = this.scanner.nextLine();
-        Usuario u = usuarios.buscarPacientePeloNome(pac);
-        if (u == null) {
+    public void incluirAutorizacao(Medico medico) {
+        System.out.print("\nEscolha o paciente:\n");
+
+        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+
+        for (Usuario usuario : this.usuarios.listar()) {
+            if (usuario instanceof Paciente) {
+                pacientes.add((Paciente) usuario);
+                System.out.println(pacientes.size() + " - " + usuario.getNome());
+            }
+        }
+        int opcao = validaOp(1, pacientes.size());
+        Paciente paciente = pacientes.get(opcao - 1);
+
+        if (paciente == null) {
             System.out.println("Paciente não encontrado.");
             return;
         }
-        Paciente paciente = (Paciente) u;
 
         System.out.println("Selecione o tipo de exame: ");
         TipoExame tipo = selecionaTipoExame();
         Exame exame = new Exame(tipo);
 
-        Medico medico = (Medico) user;
         AutorizacaoExame autorizacao = new AutorizacaoExame(medico, paciente, exame);
 
         autorizacaoExames.adicionarAutorizacao(autorizacao);

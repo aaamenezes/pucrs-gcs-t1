@@ -48,6 +48,6 @@ public class AutorizacaoExame {
                 "; Data Cadastro:  " + this.dataCadastro +
                 "; Médico Solicitante:  " + this.medicoSolicitante.getNome()
                 + "; Paciente: " + this.paciente.getNome() +
-                "; Exame: " + this.exame.getIdExame();
+                "; Exame: " + this.exame.getTipoExame().getDescricao();
     }
 }
