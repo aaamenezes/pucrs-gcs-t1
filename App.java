@@ -68,27 +68,24 @@ public class App {
     private void mostrarMenuPaciente() {
         System.out.println("\nO que você deseja fazer?\n");
         System.out.println("1 - Listar minhas autorizações de exame");
-        System.out.println("2 - Trocar usuário");
-        System.out.println("3 - Sair");
-        int opcao = validaOp(1, 3);
+        System.out.println("2 - Marcar exame como realizado");
+        System.out.println("3 - Trocar usuário");
+        System.out.println("4 - Sair");
+        int opcao = validaOp(1, 4);
 
         switch (opcao) {
             case 1:
-                ArrayList<AutorizacaoExame> lista = ((Paciente) this.usuarioLogado)
-                        .listarAutorizacaoExames(this.autorizacaoExames);
-                if (lista.isEmpty()) {
-                    System.out.println("Nenhuma autorização encontrada.");
-                } else {
-                    for (AutorizacaoExame a : lista) {
-                        System.out.println(a);
-                    }
-                }
+                listarAutorizacaoExamesPaciente();
                 mostrarMenuPaciente();
                 break;
             case 2:
-                login();
+                marcarExameComoRealizadoPaciente();
+                mostrarMenuPaciente();
                 break;
             case 3:
+                login();
+                break;
+            case 4:
                 System.out.println("Saindo...");
                 break;
         }
@@ -121,7 +118,7 @@ public class App {
                 incluirAutorizacao((Medico) usuarioLogado);
                 break;
             case 2:
-                listarAutorizacaoExames();
+                listarAutorizacaoExamesMedico();
                 break;
             case 3:
                 login();
@@ -158,6 +155,7 @@ public class App {
                 System.out.println(administradores.size() + " - " + usuario.getNome());
             }
         }
+
         int opcao = validaOp(1, administradores.size());
         return administradores.get(opcao - 1);
     }
@@ -207,6 +205,19 @@ public class App {
         }
     }
 
+    private AutorizacaoExame selecionarAutorizacaoExame(Paciente paciente) {
+        System.out.println("\nEscolha a autorização de exame:\n");
+        ArrayList<AutorizacaoExame> autorizacaoExames = new ArrayList<AutorizacaoExame>();
+
+        for (AutorizacaoExame autorizacaoExame : this.autorizacaoExames.listarAutorizacaoExamesPorPaciente(paciente)) {
+            autorizacaoExames.add(autorizacaoExame);
+            System.out.println(autorizacaoExames.size() + " - " + autorizacaoExame);
+        }
+
+        int opcao = validaOp(1, autorizacaoExames.size());
+        return autorizacaoExames.get(opcao - 1);
+    }
+
     private void boasVindas() {
         System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
         System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
@@ -222,16 +233,28 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
-    // private void marcarExameComoRealizadoPaciente() {
-    // System.out.println("Para marcar como realizado o exame, insira a data do
-    // exame no formato dd/MM/yyyy: ");
-    // String dataInserida = scanner.nextLine();
+    private void listarAutorizacaoExamesPaciente() {
+        ArrayList<AutorizacaoExame> lista = ((Paciente) this.usuarioLogado)
+                .listarAutorizacaoExames(this.autorizacaoExames);
+        if (lista.isEmpty()) {
+            System.out.println("Nenhuma autorização encontrada.");
+        } else {
+            for (AutorizacaoExame a : lista) {
+                System.out.println(a);
+            }
+        }
+    }
 
-    // LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
+    private void marcarExameComoRealizadoPaciente() {
+        System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
+        String dataInserida = scanner.nextLine();
 
-    // autorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada,
-    // null);
-    // }
+        LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
+        AutorizacaoExame autorizacaoExame = selecionarAutorizacaoExame((Paciente) this.usuarioLogado);
+
+        autorizacaoExames.marcarAutorizacaoExameComoRealizado(autorizacaoExame, dataRealizada,
+                (Paciente) this.usuarioLogado);
+    }
 
     private void listarAutorizacaoExamesPorParteNomePaciente() {
         System.out.println("Digite a parte do nome do paciente:");
@@ -327,7 +350,7 @@ public class App {
         System.out.println(autorizacao.toString());
     }
 
-    public void listarAutorizacaoExames() {
+    public void listarAutorizacaoExamesMedico() {
         System.out.println("\nDeseja listar por:\n");
         System.out.println("1 - Paciente");
         System.out.println("2 - Tipo de Exame");
