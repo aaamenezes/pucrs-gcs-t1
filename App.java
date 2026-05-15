@@ -30,15 +30,18 @@ public class App {
 
         switch (opcao) {
             case 1:
-                selecionarPaciente();
+                this.usuarioLogado = selecionarPaciente();
+                boasVindas();
                 mostrarMenuPaciente();
                 break;
             case 2:
-                selecionarMedico();
+                this.usuarioLogado = selecionarMedico();
+                boasVindas();
                 mostrarMenuMedico();
                 break;
             case 3:
-                selecionarAdministrador();
+                this.usuarioLogado = selecionarAdministrador();
+                boasVindas();
                 mostrarMenuAdministrador();
                 break;
             default:
@@ -48,7 +51,7 @@ public class App {
         }
     }
 
-    private void selecionarPaciente() {
+    private Paciente selecionarPaciente() {
         System.out.println("\nEscolha o paciente:\n");
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
@@ -59,11 +62,7 @@ public class App {
             }
         }
         int opcao = validaOp(1, pacientes.size());
-        this.usuarioLogado = pacientes.get(opcao - 1);
-
-        System.out.println("Paciente logado: " + this.usuarioLogado.getNome());
-        System.out.println("Iniciais do paciente: " + this.usuarioLogado.getIniciais());
-        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+        return pacientes.get(opcao - 1);
     }
 
     private void mostrarMenuPaciente() {
@@ -95,7 +94,7 @@ public class App {
         }
     }
 
-    private void selecionarMedico() {
+    private Medico selecionarMedico() {
         System.out.println("\nEscolha o médico:\n");
         ArrayList<Medico> medicos = new ArrayList<Medico>();
 
@@ -106,11 +105,7 @@ public class App {
             }
         }
         int opcao = validaOp(1, medicos.size());
-        this.usuarioLogado = medicos.get(opcao - 1);
-
-        System.out.println("Médico logado: " + this.usuarioLogado.getNome());
-        System.out.println("Iniciais do médico: " + this.usuarioLogado.getIniciais());
-        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+        return medicos.get(opcao - 1);
     }
 
     private void mostrarMenuMedico() {
@@ -138,7 +133,7 @@ public class App {
         }
     }
 
-    private void selecionarAdministrador() {
+    private Administrador selecionarAdministrador() {
         System.out.println("\nEscolha o administrador:\n");
         ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 
@@ -149,11 +144,7 @@ public class App {
             }
         }
         int opcao = validaOp(1, administradores.size());
-        this.usuarioLogado = administradores.get(opcao - 1);
-
-        System.out.println("Administrador logado: " + this.usuarioLogado.getNome());
-        System.out.println("Iniciais do administrador: " + this.usuarioLogado.getIniciais());
-        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
+        return administradores.get(opcao - 1);
     }
 
     private void mostrarMenuAdministrador() {
@@ -199,6 +190,12 @@ public class App {
                 mostrarMenuAdministrador();
                 break;
         }
+    }
+
+    private void boasVindas() {
+        System.out.println("Usuário logado: " + this.usuarioLogado.getNome());
+        System.out.println("Iniciais do usuário: " + this.usuarioLogado.getIniciais());
+        System.out.println("Boas vindas, " + this.usuarioLogado.getNome() + "!");
     }
 
     /* ------| OUTROS MÉTODOS |------ */
@@ -309,16 +306,7 @@ public class App {
     public void incluirAutorizacao(Medico medico) {
         System.out.print("\nEscolha o paciente:\n");
 
-        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
-
-        for (Usuario usuario : this.usuarios.listar()) {
-            if (usuario instanceof Paciente) {
-                pacientes.add((Paciente) usuario);
-                System.out.println(pacientes.size() + " - " + usuario.getNome());
-            }
-        }
-        int opcao = validaOp(1, pacientes.size());
-        Paciente paciente = pacientes.get(opcao - 1);
+        Paciente paciente = selecionarPaciente();
 
         if (paciente == null) {
             System.out.println("Paciente não encontrado.");
