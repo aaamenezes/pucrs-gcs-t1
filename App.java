@@ -133,6 +133,21 @@ public class App {
         }
     }
 
+    public TipoExame selecionarTipoExame() {
+        System.out.println("\nSelecione o tipo de exame:\n");
+
+        TipoExame tipo;
+        for (int i = 0; i < TipoExame.values().length; i++) {
+            System.out.println(i + 1 + " - " + TipoExame.values()[i].getDescricao());
+        }
+
+        int exame = validaOp(1, TipoExame.values().length) - 1;
+
+        tipo = TipoExame.values()[exame];
+
+        return tipo;
+    }
+
     private Administrador selecionarAdministrador() {
         System.out.println("\nEscolha o administrador:\n");
         ArrayList<Administrador> administradores = new ArrayList<Administrador>();
@@ -207,14 +222,16 @@ public class App {
         System.out.println(this.usuarioLogado.getIniciais());
     }
 
-    private void marcarExameComoRealizadoPaciente() {
-        System.out.println("Para marcar como realizado o exame, insira a data do exame no formato dd/MM/yyyy: ");
-        String dataInserida = scanner.nextLine();
+    // private void marcarExameComoRealizadoPaciente() {
+    // System.out.println("Para marcar como realizado o exame, insira a data do
+    // exame no formato dd/MM/yyyy: ");
+    // String dataInserida = scanner.nextLine();
 
-        LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
+    // LocalDate dataRealizada = LocalDate.parse(dataInserida, formatter);
 
-        autorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada, null);
-    }
+    // autorizacaoExames.marcarAutorizacaoExameComoRealizado(null, dataRealizada,
+    // null);
+    // }
 
     private void listarAutorizacaoExamesPorParteNomePaciente() {
         System.out.println("Digite a parte do nome do paciente:");
@@ -276,19 +293,6 @@ public class App {
         System.out.println("Usuário " + nome + " incluído com sucesso!");
     }
 
-    public TipoExame selecionaTipoExame() {
-        TipoExame tipo;
-        for (int i = 0; i < TipoExame.values().length; i++) {
-            System.out.println(i + 1 + " - " + TipoExame.values()[i].getDescricao());
-        }
-
-        int exame = validaOp(1, TipoExame.values().length) - 1;
-
-        tipo = TipoExame.values()[exame];
-
-        return tipo;
-    }
-
     public int validaOp(int min, int max) {
         int op = this.scanner.nextInt();
         this.scanner.nextLine();
@@ -313,8 +317,7 @@ public class App {
             return;
         }
 
-        System.out.println("Selecione o tipo de exame: ");
-        TipoExame tipo = selecionaTipoExame();
+        TipoExame tipo = selecionarTipoExame();
         Exame exame = new Exame(tipo);
 
         AutorizacaoExame autorizacao = new AutorizacaoExame(medico, paciente, exame);
@@ -325,24 +328,24 @@ public class App {
     }
 
     public void listarAutorizacaoExames() {
-        System.out.println("\nDeseja listar por:");
-        System.out.println("[1] Paciente\n[2] Tipo de Exame");
+        System.out.println("\nDeseja listar por:\n");
+        System.out.println("1 - Paciente");
+        System.out.println("2 - Tipo de Exame");
         int op = validaOp(1, 2);
+
         ArrayList<AutorizacaoExame> lista;
-        if (op == 1) {
-            System.out.print("Digite o nome do paciente: ");
-            this.scanner.nextLine();
-            String pac = this.scanner.nextLine();
-            Paciente paciente = usuarios.buscarPacientePeloNome(pac);
-            if (paciente == null) {
-                System.out.println("Paciente não encontrado.");
+
+        switch (op) {
+            case 1:
+                Paciente paciente = selecionarPaciente();
+                lista = autorizacaoExames.listarAutorizacaoExamesPorPaciente(paciente);
+                break;
+            case 2:
+                TipoExame tipoExame = selecionarTipoExame();
+                lista = autorizacaoExames.listarAutorizacaoExamesPorTipo(tipoExame);
+                break;
+            default:
                 return;
-            }
-            lista = autorizacaoExames.listarAutorizacaoExamesPorPaciente(paciente);
-        } else {
-            System.out.println("Selecione o Tipo de Exame: ");
-            TipoExame tipo = selecionaTipoExame();
-            lista = autorizacaoExames.listarAutorizacaoExamesPorTipo(tipo);
         }
 
         lista.sort(Comparator.comparing(AutorizacaoExame::getDataCadastro));
@@ -350,6 +353,7 @@ public class App {
         for (AutorizacaoExame a : lista) {
             System.out.println(a.toString());
         }
+        mostrarMenuMedico();
     }
 
     /*--------|   INCLUSÃO DE DADOS   |--------*/
